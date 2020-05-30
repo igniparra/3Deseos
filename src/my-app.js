@@ -59,14 +59,19 @@
        <app-drawer-layout fullbleed="" narrow="{{narrow}}">
          <!-- Drawer content -->
 
-         <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
+        <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
            <app-toolbar class="menu">Menu</app-toolbar>
            <template is=dom-if if='{{isLoggedIn}}'>
            <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-             <a class="textMenu" name="view1" href="[[rootPath]]view1">Quienes somos</a>
-             <a class="textMenu" name="miPerfil" href="[[rootPath]]miPerfil">Mi Perfil</a>
-             <a class="textMenu" name="Arma tu caja magica" href="[[rootPath]]regalar">Regalar</a>
+             <a class="textMenu" name="view1" href="[[rootPath]]view1"><img class="imagenRegalo" src="./images/present.png">Quienes somos</a>
+             <a class="textMenu" name="miPerfil" href="[[rootPath]]miPerfil"><img class="imagenRegalo" src="./images/present.png">Mi Perfil</a>
+             <a class="textMenu" name="Arma tu caja magica" href="[[rootPath]]regalar"><img class="imagenRegalo" src="./images/present.png">Regalar</a>
            </iron-selector>
+           </template>
+           <template is=dom-if if='{{!isLoggedIn}}'>
+             <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+               <a class="textMenu" name="view1" href="[[rootPath]]view1">Quienes somos</a>
+               <a class="textMenu" name="login" href="[[rootPath]]login">Ingresar</a>
            </template>
            <img class="fondoDeTres" src="./images/background.png">
          </app-drawer>
