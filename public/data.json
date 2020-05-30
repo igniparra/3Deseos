@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "name": "Tiger Nixon",
+      "position": "System Architect",
+      "salary": "$320,800",
+      "start_date": "2011/04/25",
+      "office": "Edinburgh",
+      "extn": "5421"
+    },
+    {
+      "id": "3",
+      "name": "Ashton Cox",
+      "position": "Junior Technical Author",
+      "salary": "$86,000",
+      "start_date": "2009/01/12",
+      "office": "San Francisco",
+      "extn": "1562"
+    }
+  ]
+};
