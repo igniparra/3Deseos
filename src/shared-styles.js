@@ -47,9 +47,9 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
 
         text-transform: uppercase;
         letter-spacing: 1.7px;
-        
+
         height: 62px;
-      
+
       }
 
       app-header paper-icon-button {
@@ -96,7 +96,7 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
           background-repeat: repeat-x;
           position: absolute;
       }
-       
+
       #orange {
           background-color: #f47a20;
           display: inline-table;
@@ -115,7 +115,7 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
           background-repeat: repeat-x;
           position: absolute;
       }
-       
+
       #orange2 {
           background-color: #f47a20;
           display: inline-table;
@@ -175,7 +175,7 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         z-index: 2;
 
       }
-  
+
       .imagenRegalo{
         height:20px;
         margin-right:6px;
