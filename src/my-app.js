@@ -68,11 +68,6 @@
              <a class="textMenu" name="Arma tu caja magica" href="[[rootPath]]regalar">Regalar</a>
            </iron-selector>
            </template>
-           <template is=dom-if if='{{!isLoggedIn}}'>
-             <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-               <a class="textMenu" name="view1" href="[[rootPath]]view1">Quienes somos</a>
-               <a class="textMenu" name="login" href="[[rootPath]]login">Ingresar</a>
-           </template>
            <img class="fondoDeTres" src="./images/background.png">
          </app-drawer>
 
@@ -135,7 +130,7 @@
       // If no page was found in the route data, page will be an empty string.
       // Show 'view1' in that case. And if the page doesn't exist, show 'view404'.
      if (!page) {
-       this.page = 'view1';
+       this.page = 'login';
      } else if (['view1', 'login', 'regalar','miPerfil'].indexOf(page) !== -1) {
        this.page = page;
      } else {
@@ -153,7 +148,7 @@
 
    changeRoute() {
      var $router = this.shadowRoot.querySelector("app-location");
-     $router.path = "/view1";
+     $router.path = "/login";
    }
 
    _loginStatusChanged(isLoggedIn){
