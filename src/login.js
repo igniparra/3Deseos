@@ -51,6 +51,11 @@ class MyLogin extends PolymerElement {
         data="{{isLoggedIn}}">
       </app-localstorage-document>
 
+      <app-localstorage-document
+        key="status"
+        data="{{status}}">
+      </app-localstorage-document>
+
 
       <paper-dialog id=confirmationDialog>
         Te enviamos un mail de confirmación a {{NewUsername}}
@@ -93,7 +98,8 @@ class MyLogin extends PolymerElement {
       password:String,
       NewUsername:String,
       NewPassword:String,
-      NewPasswordConfirm:String
+      NewPasswordConfirm:String,
+      isLoggedIn:Boolean
     };
   }
 
@@ -126,24 +132,43 @@ class MyLogin extends PolymerElement {
 
 
   _register(){
-    if(this.$.NewPassword==this.$.NewPasswordConfirm&&this.$.NewUsername!=null&&this.$.NewPassword!=null&&this.NewPasswordConfirm!=null){
-      // TODO: Crear nuevo usuario en DB
+    if(this.NewPassword==this.NewPasswordConfirm&&this.NewUsername!=""&&this.NewPassword!=""&&this.NewPasswordConfirm!=""){
+      var xhr = new XMLHttpRequest();
+      var url = "http://theserver.mynetgear.com:3000/api/register";
+      var request = {
+        username : this.NewUsername,
+        password : this.NewPassword
+      }
+      var that=this;
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              var reply = JSON.parse(xhr.responseText);
+              if (reply[0]){
+                that.set('isLoggedIn', true);
+                that.set('status',"1");
+              }
+          }
+      };
+      var data = JSON.stringify({request});
+      xhr.send(data);
     this.$.registerDialog.close();
     this.$.confirmationDialog.open();
   }
     else
-      if(this.$.NewPassword!=this.$.NewPasswordConfirm){
+      if(this.NewPassword!=this.NewPasswordConfirm){
         window.alert("las contraseñas son distintas");
       }
-      if(this.$.NewUsername==null){
+      if(this.NewUsername==""){
         window.alert("nombreUsuario=null");
 
       }
-      if(this.$.NewPassword==null){
+      if(this.NewPassword==""){
         window.alert("pass=null");
 
       }
-      if(this.$.NewPasswordConfirm==null){
+      if(this.NewPasswordConfirm==""){
         window.alert("passConfir=null");
 
       }
