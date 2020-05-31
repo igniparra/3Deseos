@@ -48,11 +48,14 @@ app.post('/api/login', (req, res) =>{
               respuesta.nombreChico=retChicos[0].nombre;
               respuesta.observaciones=retChicos[0].observaciones;
               respuesta.nombreOng=retOng[0].nombre;
+              var loaded=true;
             });
           });
         }
-        console.log(util.inspect(respuesta, showHidden=false, depth=2, colorize=true));
-        res.send(respuesta);
+        if (retStatus[0]==undefined||loaded) {
+          console.log(util.inspect(respuesta, showHidden=false, depth=2, colorize=true));
+          res.send(respuesta);
+        }
       });
     };
   });
@@ -68,17 +71,29 @@ app.post('/api/register', (req, res) =>{
   });
 })
 
-app.post('/api/getONG', (req, res) =>{
-  db.query('SELECT * from ....... (?,?)',[username,password], function (error, results, fields) {
+app.post('/api/startBox', (req, res) =>{ //TODO
+  const username = req.body.request.username;
+  const password = TwinBcrypt.hashSync(req.body.request.password);
+  db.query('INSERT into users (email,password) values (?,?)',[username,password], function (error, results, fields) {
     console.log(error);
     if (error) throw error;
     res.send(true);
   });
 })
 
-app.post('/api/getInterests', (req, res) =>{
+app.post('/api/getONG', (req, res) =>{
+  db.query('SELECT nombre from users WHERE nombre IS NOT NULL', function (error, results, fields) {
+    console.log(error);
+    if (error) throw error;
+    res.send(results);
+  });
+})
+
+app.post('/api/getInterests', (req, res) =>{ //TODO
   const ong = req.body.request.ong;
-  const date = req.body.request.ong;
+  const startDate = req.body.request.startDate;
+  var endDate = new Date();
+  endDate.setDate(startDate.getDate() + 30);
   var interests = [];
   db.query('SELECT * from ..... into users (email,password) values (?,?)',[username,password], function (error, results, fields) {
     console.log(error);
