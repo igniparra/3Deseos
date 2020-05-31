@@ -38,7 +38,13 @@ class MyLogin extends PolymerElement {
         data="{{status}}">
       </app-localstorage-document>
 
-      <paper-dialog class="regisCard" id=registerDialog>
+      <app-localstorage-document
+        key="username"
+        data="{{username}}">
+      </app-localstorage-document>
+
+      <template is=dom-if if='{{isRegistrar}}'>
+      <div class="card">
         <h1>La felicidad está hecha para ser compartida, registrese</h1>
         <paper-input class='data' style='data' name='username' type='email' focused='true' label='Ingrese su email' value='{{NewUsername::input}}'>
         </paper-input>
@@ -49,9 +55,11 @@ class MyLogin extends PolymerElement {
         <br>
         <paper-button raised class="buttonLogin" on-tap='_register'><img class="imagenRegalo" src="./images/celebration.png"/>Registrarse</paper-button>
         <paper-dialog class="errorCard" id=errorDialog>Los datos ingresados no son correctos.</paper-dialog>
-        <div class="txtRegis">¿Ya eres miembro?<paper-button class="buttonLink" on-tap='_closeRegisterDialog'>Iniciar Sesión</paper-button></div>
-      </paper-dialog>
+        <div class="txtRegis">¿Ya eres miembro? <paper-button class="buttonLink" on-tap='_switchRegistrar'>Iniciar Sesión</paper-button></div>
+      </div>
+      </template>
 
+      <template is=dom-if if='{{!isRegistrar}}'>
       <div class="card">
         <h1>Ingrese para sacar sorisas</h1>
         <paper-input class='data' style='data' name='username' type='email' focused='true' label='Ingrese su email' value='{{username::input}}'>
@@ -61,23 +69,47 @@ class MyLogin extends PolymerElement {
         </paper-input>
         <br><br>
         <paper-button raised class="buttonLogin" on-tap='submit'><img class="imagenRegalo" src="./images/present.png"/>Ingresar</paper-button>
-        <div class="txtRegis">¿Todavía no tienes cuenta? <paper-button class="buttonLink" on-tap='_openRegisterDialog'>Registrarse</paper-button></div>
-
+        <div class="txtRegis">¿Todavía no tienes cuenta? <paper-button class="buttonLink" on-tap='_switchRegistrar'>Registrarse</paper-button></div>
       </div>
+      </template>
+
     `;
   }
 
   static get properties() {
     return {
-      username:String,
+      username:{
+        type:String,
+        notify: true
+      },
       password:String,
       NewUsername:String,
       NewPassword:String,
       NewPasswordConfirm:String,
-      isLoggedIn:Boolean
+      isLoggedIn:Boolean,
+      isRegistrar:{
+        type: Boolean,
+        notify: true,
+        value: false
+      },
+      status:String
     };
   }
 
+//Este codigo es util para cuando querramos popular un DOM-REPEAT
+/*  _toArray(obj, deep) {
+    var array = [];
+    for (var key in obj) {
+      if (deep || obj.hasOwnProperty(key)) {
+        array.push({
+          key: key,
+          val: obj[key]
+        });
+      }
+    }
+    return array;
+  }
+*/
   submit(){
       var xhr = new XMLHttpRequest();
       var url = "http://theserver.mynetgear.com:3000/api/login";
@@ -91,8 +123,17 @@ class MyLogin extends PolymerElement {
       xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
               var reply = JSON.parse(xhr.responseText);
-              that.set('isLoggedIn', reply);
-              if (reply==false) that._openErrorDialog();
+              console.log(reply);
+              if (reply.loginStatus){
+                  that.set('isLoggedIn', reply.loginStatus);
+                  that.set('username',reply.email);
+                  that.set('status',reply.status);
+                  that.set('chico_id',reply.chico_id);
+                  that.set('fecha_nacimiento',reply.fecha_nacimiento);
+                  that.set('nombreChico',reply.nombreChico);
+                  that.set('observaciones',reply.observaciones);
+                  that.set('nombreOng',reply.nombreOng);
+              }else window.alert("El nombre de usuario o la contraseña no son válidos");
           }
       };
       var data = JSON.stringify({request});
@@ -123,13 +164,12 @@ class MyLogin extends PolymerElement {
               if (reply[0]){
                 that.set('isLoggedIn', true);
                 that.set('status',"1");
-              }
+                that._submit();
+              } else window.alert("Ha ocurrido un error, vuelve a intentar!");
           }
       };
       var data = JSON.stringify({request});
       xhr.send(data);
-    this.$.registerDialog.close();
-    this.$.confirmationDialog.open();
   }
     else
       if(this.NewPassword!=this.NewPasswordConfirm){
@@ -150,8 +190,8 @@ class MyLogin extends PolymerElement {
       this.$.errorDialog.open();
   }
 
-  _openErrorDialog(){
-    this.$.errorDialog.open();
+  _switchRegistrar(){
+    this.isRegistrar=!this.isRegistrar;
   }
 
   _closeErrorDialog(){

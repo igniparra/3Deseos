@@ -50,6 +50,11 @@
         data="{{isLoggedIn}}">
       </app-localstorage-document>
 
+      <app-localstorage-document
+        key="username"
+        data="{{username}}">
+      </app-localstorage-document>
+
        <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
        </app-location>
 
@@ -122,7 +127,8 @@
          type: Boolean,
          value: false,
          notify: true
-       }
+       },
+       username: String
      };
    }
 
