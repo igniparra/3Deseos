@@ -20,44 +20,76 @@ class Regalar extends PolymerElement {
           display: block;
           padding: 10px;
         }
+        .monstruito{
+          width:200px;;
+          position:relative;
+          margin-top: -20px;
+          margin-left:8%;
+          float:left;
+      }
+      .dataCumpleañero{
+        width:100%;
+        position:relative;
+        margin-bottom:20px;
+        height:220px;
+      }
       </style>
       <app-localstorage-document 
           key="status" 
           data="{{status}}">
       </app-localstorage-document>
+
+      <paper-dialog id='actions'>
+        <h2>Desea confirmar que realizará de la CAJA MAGICA para {{nombreCumpleañero}}</h2>
+        <div class="buttons">
+          <paper-button dialog-dismiss>Decline</paper-button>
+          <paper-button dialog-confirm autofocus>Accept</paper-button>
+        </div>
+      </paper-dialog>
+
       <div class="card">
         <p>
           <template is=dom-if if='{{_isItMe("1")}}'>
             <div class="contenedorFecha">
-              <div class="indicacionFechaYOng">Seleccione la fecha limite de envio de su CAJA MAGICA</div>
-              <date-picker class="inputDate"></date-picker>
+              <div class="indicacionFechaYOng"> Seleccione la fecha limite de envio de su CAJA MAGICA</div>
+              <date-picker class="inputDate" date="{{startDate}}"></date-picker>
             </div>
-            <div class="indicacionFechaYOng">Seleccione la organizacion con la que desea involucrarse</div>
-            <paper-dropdown-menu label="ong">
-              <paper-listbox slot="dropdown-content" selected="1">
-                <template is="dom-repeat" items="{{_toArray(ongList)}}">
-                <paper-item>[[item.val]]</paper-item>
-                </template>
-              <paper-listbox>
-            <paper-dropdown-menu>
-
-            <paper-button class="botonPaso continuar" toggles raised>Continuar</paper-button>
+            <div class="indicacionFechaYOng"> {{_toArray(ongList)}} Seleccione la organizacion con la que desea involucrarse</div>
+            <paper-dropdown label="ONG" value="{{ongSelected}}" searchable multi>
+               <template is="dom-repeat" items="{{_toArray(ongList)}}" as="item">
+                   <paper-item value$="[[item.val.nombre]]">[[item.val.nombre]]</paper-item>
+              </template>
+           </paper-dropdown>
+            <paper-button class="botonPaso continuar" toggles raised on-tap="_getIntereses">Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("2")}}'>
             <div class="indicacionFechaYOng">Seleccione la tematica de su CAJA MAGICA para hacerla personalizada</div>
-            <paper-dropdown-menu label="intereses">
+            <paper-dropdown-menu class="ongSelector" label="intereses">
               <paper-listbox slot="dropdown-content" selected="1">
                 <template is="dom-repeat" items="{{_toArray(interesesList)}}">
                 <paper-item>[[item.val]]</paper-item>
                 </template>
               <paper-listbox>
             <paper-dropdown-menu>
-          <paper-button class="arrow" noink><</paper-button>
           <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
+          <!--Se debe llamar a la funcion que elige un niño aleatoriamente-->
           </template>
 
           <template is=dom-if if='{{_isItMe("3")}}'>
+          <div class="dataCumpleañero">
+            <img class='monstruito' src="./images/ImagenesPasos/Monstruito.png">
+            <div class="decripCumpleañero">
+              <div class="nombreCumpleañero">Joaquin</div>
+              <div>Cumplo 11</div>
+              <div>Futbol</div>
+              <div>Soy celiaco</div>
+            </div>
+          </div>
+          <paper-button class="continuar botonPaso" raised on-tap='_confirmation'>Continuar</paper-button>
+          </template>
+
+          <template is=dom-if if='{{_isItMe("4")}}'>
           <div>
             <img class="imagenNum" src="./images/numeros/numeros-pasos-01.png">
             <div class="instruccionTxt">
@@ -67,10 +99,10 @@ class Regalar extends PolymerElement {
              <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso1.png">
           </div>
           <paper-button class="arrow" noink><</paper-button>
-          <paper-button class="botonPaso continuar" toggles raised>Continuar</paper-button>
+          <paper-button class="botonPaso continuar" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
-          <template is=dom-if if='{{_isItMe("4")}}'>
+          <template is=dom-if if='{{_isItMe("5")}}'>
           <div>
             <img class="imagenNum" src="./images/numeros/numeros-pasos-03.png">
              <div class="instruccionTxt">
@@ -83,7 +115,7 @@ class Regalar extends PolymerElement {
           <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button> 
           </template>
 
-          <template is=dom-if if='{{_isItMe("5")}}'>
+          <template is=dom-if if='{{_isItMe("6")}}'>
           <div>
             <img class="imagenNum" src="./images/numeros/numeros-pasos-04.png">
             <div class="instruccionTxt">
@@ -96,7 +128,7 @@ class Regalar extends PolymerElement {
           <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
           </template>
 
-          <template is=dom-if if='{{_isItMe("6")}}'>
+          <template is=dom-if if='{{_isItMe("7")}}'>
           <div width="100%">
             <img class="imagenNum" src="./images/numeros/numeros-pasos-05.png">
              <div class="instruccionTxt">
@@ -109,7 +141,7 @@ class Regalar extends PolymerElement {
           <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
           </template>
 
-          <template is=dom-if if='{{_isItMe("7")}}'>
+          <template is=dom-if if='{{_isItMe("8")}}'>
           <div>
             <img class="imagenNum" src="./images/numeros/numeros-pasos-06.png">
              <div class="instruccionTxt">
@@ -122,7 +154,7 @@ class Regalar extends PolymerElement {
           <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
           </template>
 
-          <template is=dom-if if='{{_isItMe("8")}}'>
+          <template is=dom-if if='{{_isItMe("9")}}'>
           <div>
             <img class="imagenNum" src="./images/numeros/numeros-pasos-07.png">
             <div class="instruccionTxt">
@@ -136,7 +168,7 @@ class Regalar extends PolymerElement {
           </template>
   
 
-          <template is=dom-if if='{{_isItMe("9")}}'>
+          <template is=dom-if if='{{_isItMe("10")}}'>
           <div>
             <img class="imagenNum" src="./images/numeros/numeros-pasos-08.png">
              <div class="instruccionTxt">
@@ -149,7 +181,7 @@ class Regalar extends PolymerElement {
           <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button> 
           </template>
 
-          <template is=dom-if if='{{_isItMe("10")}}'>
+          <template is=dom-if if='{{_isItMe("11")}}'>
           <div>
             <img class="imagenNum" src="./images/numeros/numeros-pasos-09.png">
             <div class="instruccionTxt">
@@ -171,7 +203,8 @@ class Regalar extends PolymerElement {
      return {
       status:{ 
         type:String,
-        value:"2"
+        value:"4",
+        notify:true
       },
       ongList:{
         type: Object,
@@ -180,13 +213,29 @@ class Regalar extends PolymerElement {
      interesesList:{
         type: Object,
         notify:true
+      },
+      ongSelected:{
+        type: String,
+        value:""
+      },
+      startDate:{
+        type: Date,
+        notify:true
       }
-     };
-   }
+   };
+ }
 
-    _getIntereses(){
+  _confirmation(){
+    this.$.actions.open();
+  }
+
+  _getIntereses(){
       var xhr = new XMLHttpRequest();
       var url = "http://theserver.mynetgear.com:3000/api/getIntereses";
+      var request = {
+        startDate : this.startDate,
+        ongSelected : this.ongSelected
+      }
       var that=this;
       xhr.open("POST", url, true);//creo que deberia haber un get
       xhr.setRequestHeader("Content-Type", "application/json");
@@ -196,9 +245,30 @@ class Regalar extends PolymerElement {
               that.set('interesesList', reply);
           }
       };
-      xhr.send();
+      var data = JSON.stringify({request});
+      xhr.send(data);
   }
-
+  _nextStatus(){
+      var xhr = new XMLHttpRequest();
+      var url = "http://theserver.mynetgear.com:3000/api/changeStatus";
+      var nextSt=(parseInt(this.status)+1).toString();
+      var request = {
+        status: nextSt
+      }
+      var that=this;
+      xhr.open("POST", url, true);//creo que deberia haber un get
+      xhr.setRequestHeader("Content-Type", "application/json");
+      /*xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              var reply = JSON.parse(xhr.responseText);
+              that.set('status', reply);
+          }
+      };*/
+      this.status=nextSt;
+      window.alert(this.status);
+      var data = JSON.stringify({request});
+      xhr.send(data);
+  }
     _getOng(){
       var xhr = new XMLHttpRequest();
       var url = "http://theserver.mynetgear.com:3000/api/getOng";
