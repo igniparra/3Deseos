@@ -61,7 +61,8 @@ class Regalar extends PolymerElement {
 
       <div class="card">
         <p>
-          <template is=dom-if if='{{_isItMe("1")}}'>
+          <template is=dom-if if='{{status1}}'>
+            {{_getOng()}}
             <div class="contenedorFecha">
               <div class="indicacionFechaYOng"> Seleccione la fecha limite de envio de su CAJA MAGICA</div>
               <date-picker class="inputDate"  default="2020-05-30" date="{{startDate}}"></date-picker>
@@ -74,25 +75,21 @@ class Regalar extends PolymerElement {
                 </template>
               <paper-listbox slot="dropdown-content" selected="1">
            </paper-dropdown-menu>
-           ONG Selected: {{ongSelected}}<br>
-           Fecha: {{startDate}}<br>
             <paper-button class="botonPaso continuar" toggles raised on-tap="_getIntereses">Continuar</paper-button>
           </template>
 
-          <template is=dom-if if='{{_isItMe("2")}}'>
+          <template is=dom-if if='{{status2}}'>
             <div class="indicacionFechaYOng">Seleccione la tematica de su CAJA MAGICA para hacerla personalizada</div>
-            <paper-dropdown-menu class="ongSelector" label="intereses">
-              <paper-listbox slot="dropdown-content" selected="1">
+              <paper-listbox slot="dropdown-content" selected="{{selectedInterest}}">
                 <template is="dom-repeat" items="{{_toArray(interesesList)}}">
                 <paper-item>[[item.val]]</paper-item>
                 </template>
               <paper-listbox>
-            <paper-dropdown-menu>
           <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           <!--Se debe llamar a la funcion que elige un niño aleatoriamente-->
           </template>
 
-          <template is=dom-if if='{{_isItMe("3")}}'>
+          <template is=dom-if if='{{status3}}'>
           <div class="dataCumpleañero">
             <img class='monstruito' src="./images/ImagenesPasos/Monstruito.png">
             <div class="decripCumpleañero">
@@ -105,7 +102,7 @@ class Regalar extends PolymerElement {
           <paper-button class="continuar botonPaso" raised on-tap='_confirmation'>Continuar</paper-button>
           </template>
 
-          <template is=dom-if if='{{_isItMe("4")}}'>
+          <template is=dom-if if='{{status4}}'>
           <div>
             <img class="imagenNum" src="./images/numeros/numeros-pasos-01.png">
             <div class="instruccionTxt">
@@ -118,7 +115,7 @@ class Regalar extends PolymerElement {
           <paper-button class="botonPaso continuar" toggles raised on-tap="_nextStatus" on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
-          <template is=dom-if if='{{_isItMe("5")}}'>
+          <template is=dom-if if='{{status5}}'>
           <div>
             <img class="imagenNum" src="./images/numeros/numeros-pasos-03.png">
              <div class="instruccionTxt">
@@ -131,7 +128,7 @@ class Regalar extends PolymerElement {
           <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
-          <template is=dom-if if='{{_isItMe("6")}}'>
+          <template is=dom-if if='{{status6}}'>
           <div>
             <img class="imagenNum" src="./images/numeros/numeros-pasos-04.png">
             <div class="instruccionTxt">
@@ -144,7 +141,7 @@ class Regalar extends PolymerElement {
           <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
-          <template is=dom-if if='{{_isItMe("7")}}'>
+          <template is=dom-if if='{{status7}}'>
           <div width="100%">
             <img class="imagenNum" src="./images/numeros/numeros-pasos-05.png">
              <div class="instruccionTxt">
@@ -157,7 +154,7 @@ class Regalar extends PolymerElement {
           <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
-          <template is=dom-if if='{{_isItMe("8")}}'>
+          <template is=dom-if if='{{status8}}'>
           <div>
             <img class="imagenNum" src="./images/numeros/numeros-pasos-06.png">
              <div class="instruccionTxt">
@@ -170,7 +167,7 @@ class Regalar extends PolymerElement {
           <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
-          <template is=dom-if if='{{_isItMe("9")}}'>
+          <template is=dom-if if='{{status9}}'>
           <div>
             <img class="imagenNum" src="./images/numeros/numeros-pasos-07.png">
             <div class="instruccionTxt">
@@ -184,7 +181,7 @@ class Regalar extends PolymerElement {
           </template>
 
 
-          <template is=dom-if if='{{_isItMe("10")}}'>
+          <template is=dom-if if='{{status10}}'>
           <div>
             <img class="imagenNum" src="./images/numeros/numeros-pasos-08.png">
              <div class="instruccionTxt">
@@ -197,7 +194,7 @@ class Regalar extends PolymerElement {
           <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
-          <template is=dom-if if='{{_isItMe("11")}}'>
+          <template is=dom-if if='{{status11}}'>
           <div>
             <img class="imagenNum" src="./images/numeros/numeros-pasos-09.png">
             <div class="instruccionTxt">
@@ -219,20 +216,26 @@ class Regalar extends PolymerElement {
      return {
       status:{
         type:String,
-        value:"4",
+        value:"1",
         notify:true
       },
       ongList:{
         type: Object,
         notify:true
       },
-     interesesList:{
+      interesesList:{
         type: Object,
+        notify:true
+      },
+      selectedInterest:{
+        type: String,
+        value:"0",
         notify:true
       },
       ongSelected:{
         type: String,
-        value:""
+        value:"0",
+        notify:true
       },
       startDate:{
         type: Date,
@@ -241,6 +244,56 @@ class Regalar extends PolymerElement {
 
       loaded:{
         type: Boolean,
+        notify:true
+      },
+      status1:{
+        type: Boolean,
+        value: true,
+        notify:true
+      },
+      status2:{
+        type: Boolean,
+        value: false,
+        notify:true
+      },
+      status3:{
+        type: Boolean,
+        value: false,
+        notify:true
+      },
+      status4:{
+        type: Boolean,
+        value: false,
+        notify:true
+      },
+      status5:{
+        type: Boolean,
+        value: false,
+        notify:true
+      },
+      status6:{
+        type: Boolean,
+        value: false,
+        notify:true
+      },
+      status7:{
+        type: Boolean,
+        value: false,
+        notify:true
+      },
+      status8:{
+        type: Boolean,
+        value: false,
+        notify:true
+      },
+      status9:{
+        type: Boolean,
+        value: false,
+        notify:true
+      },
+      status10:{
+        type: Boolean,
+        value: false,
         notify:true
       }
    };
@@ -252,32 +305,65 @@ class Regalar extends PolymerElement {
       this.ongSelected=selectedItem
     }
   }
+
   _confirmation(){
     this.$.actions.open();
   }
 
-  _getIntereses(){
-      var xhr = new XMLHttpRequest();
-      var url = "http://theserver.mynetgear.com:3000/api/getIntereses";
-      var request = {
-        startDate : this.startDate,
-        ongSelected : this.ongList[this.ongSelected]
-      }
-      var that=this;
-      xhr.open("POST", url, true);//creo que deberia haber un get
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4 && xhr.status === 200) {
-              var reply = JSON.parse(xhr.responseText);
-              that.set('interesesList', reply);
-          }
-      };
-      var data = JSON.stringify({request});
-      xhr.send(data);
-      _nextStatus();
+  _setStatusFalse(){
+    this.set('status1',false);
+    this.set('status2',false);
+    this.set('status3',false);
+    this.set('status4',false);
+    this.set('status5',false);
+    this.set('status6',false);
+    this.set('status7',false);
+    this.set('status8',false);
+    this.set('status9',false);
+    this.set('status10',false);
   }
+
+  _setStatusTrue(s){
+    switch(s){
+      case '1':
+        this.set('status1',true);
+        break;
+      case '2':
+        this.set('status2',true);
+        break;
+      case '3':
+        this.set('status3',true);
+        break;
+      case '4':
+        this.set('status4',true);
+        break;
+      case '5':
+        this.set('status5',true);
+        break;
+      case '6':
+        this.set('status6',true);
+        break;
+      case '7':
+        this.set('status7',true);
+        break;
+      case '8':
+        this.set('status8',true);
+        break;
+      case '9':
+        this.set('status9',true);
+        break;
+      case '10':
+        this.set('status10',true);
+        break;
+    }
+
+  }
+
   _nextStatus(){
-      var xhr = new XMLHttpRequest();
+    this.status=(parseInt(this.status)+1).toString();
+    this._setStatusFalse();
+    this._setStatusTrue(this.status);
+      /*var xhr = new XMLHttpRequest();
       var url = "http://theserver.mynetgear.com:3000/api/changeStatus";
       var nextSt=(parseInt(this.status)+1).toString();
       var request = {
@@ -295,24 +381,52 @@ class Regalar extends PolymerElement {
       this.status=nextSt;
       var data = JSON.stringify({request});
       xhr.send(data);
+      */
   }
-   _previousStatus(){
+
+ _previousStatus(){
+   this.status=(parseInt(this.status)-1).toString();
+   this._setStatusFalse();
+   this._setStatusTrue(this.status);
+   /*
+    var xhr = new XMLHttpRequest();
+    var url = "http://theserver.mynetgear.com:3000/api/changeStatus";
+    var nextSt=(parseInt(this.status)-1).toString();
+    var request = {
+      status: nextSt
+    }
+    var that=this;
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var reply = JSON.parse(xhr.responseText);
+            that.set('status', reply);
+        }
+    };
+    this.status=nextSt;
+    var data = JSON.stringify({request});
+    xhr.send(data);
+    */
+  }
+
+  _getIntereses(){
       var xhr = new XMLHttpRequest();
-      var url = "http://theserver.mynetgear.com:3000/api/changeStatus";
-      var nextSt=(parseInt(this.status)-1).toString();
+      var url = "http://theserver.mynetgear.com:3000/api/getIntereses";
       var request = {
-        status: nextSt
+        startDate : this.startDate,
+        ongSelected : this.ongList[this.ongSelected]
       }
       var that=this;
-      xhr.open("POST", url, true);
+      xhr.open("POST", url, true);//creo que deberia haber un get
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
               var reply = JSON.parse(xhr.responseText);
-              that.set('status', reply);
+              that.set('interesesList', reply);
+              that._nextStatus();
           }
       };
-      this.status=nextSt;
       var data = JSON.stringify({request});
       xhr.send(data);
   }
@@ -344,9 +458,9 @@ class Regalar extends PolymerElement {
       return array;
     }
 
-  _isItMe(s){
+  /*_isItMe(s){
      if(s=="1"){
-      this._getOng();
+       this._getOng();
     }
 
     if(this.status==s){
@@ -354,6 +468,6 @@ class Regalar extends PolymerElement {
     }else{
       return false;
     }
-  }
+  }*/
 }
 window.customElements.define('my-regalar', Regalar);
