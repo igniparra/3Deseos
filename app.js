@@ -32,7 +32,6 @@ app.post('/api/login', (req, res) =>{
 
   db.query('SELECT id, password from users where email=?',[username], function (error, idPass, fields) {
     if (error) throw error;
-    console.log(util.inspect(idPass[0], showHidden=false, depth=2, colorize=true));
     if (TwinBcrypt.compareSync(password, idPass[0].password)) {
       respuesta.email=username;
       respuesta.loginStatus = true;
@@ -53,7 +52,6 @@ app.post('/api/login', (req, res) =>{
           });
         }
         if (retStatus[0]==undefined||loaded) {
-          console.log(util.inspect(respuesta, showHidden=false, depth=2, colorize=true));
           res.send(respuesta);
         }
       });
@@ -116,18 +114,19 @@ Date.prototype.getWeek = function (dowOffset) {
     return weeknum;
 };
 
-app.post('/api/getInterests', (req, res) =>{ //TODO
-  const ong = req.body.request.ong;
-  const startDate = req.body.request.startDate;
-  var endDate = new Date();
-  endDate.setDate(startDate.getDate() + 30);
+app.post('/api/getIntereses', (req, res) =>{ //TODO
+  const ong = req.body.request.ongSelected;
+  console.log("ong: "+ong);
+  const startDate = new Date(req.body.request.startDate);
+  console.log("fecha: "+startDate);
   var startWeek=startDate.getWeek();
-  var endWeek=endDate.getWeek();
-  var interests = [];
-  db.query('SELECT * from ..... into users (email,password) values (?,?)',[ong], function (error, results, fields) {
+  var endWeek=startDate.getWeek()+4;
+  //var interests = [];
+  db.query('SELECT categorias.nombre from categorias inner join chicos on categorias.id=chicos.categoria_id WHERE organizacion_id=? and weekofyear(chicos.fecha_nacimiento) BETWEEN ? and ?',[ong,startWeek,endWeek], function (error, results, fields) {
     console.log(error);
     if (error) throw error;
-    res.send(true);
+    res.send(results);
+    console.log(util.inspect(results, showHidden=false, depth=2, colorize=true));
   });
 })
 
