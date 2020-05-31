@@ -27,7 +27,7 @@ class MiPerfil extends PolymerElement {
          <div class="txtPerfil">
             <div class="tituloPerfil">MI PERFIL</div>
             <div class="usernameBox">mateo@gmail.com</div>
-            <div class="cantCajasM"><img class='imagenRegalo' src="./images/present.png"> 1 CAJA MAGICA</div>
+            <div class="cantCajasM"><img class='imagenRegalo' src="./images/present.png">1 CAJA MAGICA</div>
          <div>
       </div>
     `;

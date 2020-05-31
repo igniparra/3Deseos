@@ -204,16 +204,16 @@ class Regalar extends PolymerElement {
           </template>
 
           <template is=dom-if if='{{status11}}'>
-          <div>
-            <img class="imagenNum" src="./images/numeros/numeros-pasos-09.png">
-            <div class="instruccionTxt">
-              <div class="tituloPaso">Cierra la caja</div>
-              <div class="descripcionPaso">Una vez cerrada la caja Mágica, imprime la etiqueta y colócala en la parte superior de la caja.</div>
+            <div>
+              <img class="imagenNum" src="./images/numeros/numeros-pasos-09.png">
+              <div class="instruccionTxt">
+                <div class="tituloPaso">Cierra la caja</div>
+                <div class="descripcionPaso">Una vez cerrada la caja Mágica, imprime la etiqueta y colócala en la parte superior de la caja.</div>
+              </div>
+              <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso8.png">
             </div>
-            <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso8.png">
-          </div>
-          <paper-button class="arrow" noink on-tap="_previousStatus" on-tap="_previousStatus"><</paper-button>
-          <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
+            <paper-button class="arrow" noink on-tap="_previousStatus" on-tap="_previousStatus"></paper-button>
+            <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
         </p>
@@ -382,6 +382,9 @@ class Regalar extends PolymerElement {
         this.set('status10',true);
         break;
       case '11':
+        this.set('status11',true);
+        break;
+      case '12':
         this.set('status11',true);
         break;
     }
