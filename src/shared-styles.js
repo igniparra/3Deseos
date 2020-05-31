@@ -192,6 +192,35 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
           margin-left:0px;
         }
 
+        .imagenMontruitoHola{
+          width: 400px;
+          position:absolute;
+          top:70px;
+          left: 30px;
+
+        }
+        .imagenTortaHola{
+          width: 220px;
+          position:absolute;
+          bottom:0px;
+          right: 20px;
+        }
+        .inicio{
+
+        }
+        .holaTitle{
+          color:#b26aac;
+          font-size:25px;
+        }
+        .holaDescrip{
+          font-size: 17px;
+        }
+        .holaTxt{
+          position:relative;
+          margin-top: 150px;
+          margin-left: 300px;
+          width: 600px;
+        }
       div.card{
         margin: 24px;
         padding: 50px;
