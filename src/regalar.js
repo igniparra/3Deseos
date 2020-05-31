@@ -27,7 +27,7 @@ class Regalar extends PolymerElement {
       </app-localstorage-document>
 
       <paper-dialog class="confirmarCumpleañero" id='actions'>
-        <h2 class"txtCondir">Desea confirmar :)</h2>
+        <h2 class"txtCondir">Confirma que realizará la CAJA MAGICA a Joaquin</h2>
         <div class="buttons">
           <paper-button dialog-dismiss class="butConfirCum" on_tap='_previousStatus'>No</paper-button>
           <paper-button dialog-confirm autofocus class="butConfirCum" on-tap='_nextStatus'>Si</paper-button>
@@ -43,7 +43,7 @@ class Regalar extends PolymerElement {
               <date-picker class="inputDate"  default="2020-05-30" date="{{startDate}}"></date-picker>
             </div>
             <div class="indicacionFechaYOng">Seleccione la organizacion con la que desea involucrarse</div>
-            <paper-dropdown-menu class="piletonDropdown" label="ONG" no-animations="true">
+            <paper-dropdown-menu vertical-offset="60" class="piletonDropdown" label="Seleccione la ONG" no-animations="true">
               <paper-listbox slot="dropdown-content" selected="{{ongSelected}}">
                 <template is="dom-repeat" items="{{_toArray(ongList)}}" as="item">
                      <paper-item>[[item.val.nombre]]</paper-item>
