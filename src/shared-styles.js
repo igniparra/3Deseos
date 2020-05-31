@@ -198,13 +198,13 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         height:30px;
         margin-top:-10px;
       }
-      .imagenNum{
-          height: 100px;
-          width: 100px;
-          position:relative;
-          float:left;
-          margin-top: -10px;
-      }
+  
+       .imagenDescPaso{
+          width:70%;
+          margin-top:15px;
+          margin-bottom: 80px;
+        }
+      
        .textMenu{
         margin-top: -45px;
         margin-left: 40px;
@@ -277,16 +277,7 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
           font-size: 13px;
           margin-top: 70px;
         }
-        .stepNumber{
-          position: relative;
-          margin-left: 35px;
-          margin-top: 12px;
-          color: white;
-          font-size: 50px;
-          font-weight: 800;
-          background-color:transparent;
-        }
-
+      
       .botonPaso{
         background-color:#b26aac;
         color: white;
@@ -310,6 +301,19 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
       .volverAtras{
         opacity: 0.9;
         left:32px;
+
+        background-color:#b26aac;
+        color: white;
+        position: absolute; 
+        bottom:32px; 
+        height: 47px;
+        width: 10px;
+
+        box-shadow: 0px 0px 0px 0px;
+        cursor: pointer;
+
+        font-weight: 450;
+        font-size: 20px;
       }
 
       .continuar{ 
@@ -321,14 +325,30 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         margin-left: 30px;
         top: 7px;
       }
+       .imagenDescPaso{
+          width:70%;
+          margin-top:15px;
+          margin-bottom: 80px;
+          margin-left:10%;
+        }
       .descripcionPaso{
           color: black;
+          margin-bottom: 10px;
+          //width:350px;
+          width:37vw;
       }
       .tituloPaso{
           color: black;
           font-size: 30px;
           font-weight: 450;
+          width:37vw;
         }
+         .imagenNum{
+          width: 17%;
+          position:relative;
+          float:left;
+          margin-top: -10px;
+      }
 
     </style>
   </template>
