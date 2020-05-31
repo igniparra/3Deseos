@@ -21,10 +21,11 @@ class Regalar extends PolymerElement {
           padding: 10px;
         }
       </style>
-      <app-localstorage-document 
-          key="status" 
+      <app-localstorage-document
+          key="status"
           data="{{status}}">
       </app-localstorage-document>
+
       <div class="card">
         <p>
           <template is=dom-if if='{{_isItMe("1")}}'>
@@ -80,7 +81,7 @@ class Regalar extends PolymerElement {
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso2.png">
           </div>
           <paper-button class="arrow" noink><</paper-button>
-          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button> 
+          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("5")}}'>
@@ -132,9 +133,9 @@ class Regalar extends PolymerElement {
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso6.png">
           </div>
           <paper-button class="arrow" noink><</paper-button>
-          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button> 
+          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
           </template>
-  
+
 
           <template is=dom-if if='{{_isItMe("9")}}'>
           <div>
@@ -146,7 +147,7 @@ class Regalar extends PolymerElement {
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso7.png">
           </div>
           <paper-button class="arrow" noink><</paper-button>
-          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button> 
+          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("10")}}'>
@@ -169,7 +170,7 @@ class Regalar extends PolymerElement {
 
   static get properties() {
      return {
-      status:{ 
+      status:{
         type:String,
         value:"2"
       },
@@ -179,6 +180,10 @@ class Regalar extends PolymerElement {
       },
      interesesList:{
         type: Object,
+        notify:true
+      },
+      loaded:{
+        type: Boolean,
         notify:true
       }
      };
