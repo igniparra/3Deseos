@@ -408,6 +408,13 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         box-shadow: -4px 7px 14px 8px rgba(249,241,247,0.89);
        }
 
+       .piletonDropdown{
+          width:450px;
+          --paper-input-container-underline-focus: {
+            border-color:#b26aac;
+         };
+        }
+       
       paper-button.buttonLink{
           border-width: 0px;
           background-color: transparent;
