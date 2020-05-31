@@ -33,11 +33,12 @@
                                         <th rowspan="2" style="vertical-align: middle;">Codigo</th>
                                         <th>Niñ@</th>
                                         <th>Gusto</th>
+                                        <th>Cumpleaños</th>
                                         <th>Observacion</th>
                                     </tr>
                                     <tr>
-                                        <th colspan="2">Fotos o Videos</th>
-                                        <th>Entregar</th>
+                                        <th colspan="3">Fotos o Videos</th>
+                                        <th colspan="1">Entregar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -45,13 +46,15 @@
                                         <tr>
                                             <td rowspan="2"  style="vertical-align: middle;">{{ sprintf('%04d', $caja->id) }}</td>
                                             <td>{{ $caja->chico->nombre }}</td>
-                                            <td>{{ $caja->categoria->nombre }}</td>
+                                            <td>{{ $caja->chico->gusto->nombre }}</td>
+
+                                            <td>{{ date("d/m", strtotime($caja->chico->fecha_nacimiento)) }}/{{ date("y") }}</td>
                                             <td>{{ $caja->chico->observaciones }}</td>
                                         </tr>
                                         <tr>
                                             {{ Form::open(['route' => ['organizador.caja.files', $caja->id ],'method'=>'POST', 'files'=> true]) }}
-                                            <td colspan="2">{{ Form::file('files[]', array('multiple'=>true,'class'=>'send-btn')) }}</td>
-                                            <td>{{ Form::submit('Entregar', array('class'=> 'btn btn-success'))}}</td>
+                                            <td colspan="3">{{ Form::file('files[]', array('multiple'=>true,'class'=>'send-btn')) }}</td>
+                                            <td colspan="1">{{ Form::submit('Entregar', array('class'=> 'btn btn-success'))}}</td>
                                             {{ Form::close() }}
                                         </tr>
                                     @endforeach
@@ -76,7 +79,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Aca te vamos a explicar todo lo que no entiendas....</p>
+                        <p>Si pusiste "Validar" y "OK" al controlar, la caja aparece aquí.<br><br>
+                            Debes entregar la Caja Mágica el niño que figura en la lista en la fecha que aparece allí.<br><br>
+                            Una vez que hayas hecho eso, puedes subir fotos de ese momento haciendo click en "choose files" y seleccionando las fotos de tu Galería para que el donante pueda recibirlas. <br><br>
+                            Por último, haces click en "entregar" y listo! </p>
                     </div>
                 </div>
             </div>

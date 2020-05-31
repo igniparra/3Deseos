@@ -32,6 +32,17 @@ class OrganizadorCajasController extends BaseController{
         return redirect()->action('OrganizadorCajasController@controlar');
     }
 
+    public function reportar($id){
+
+        $caja = Caja::find($id);
+        $caja->estado_id = 13;
+        $caja->save();
+
+        Session::flash('warning', 'La caja fue reportada existosamente!');
+
+        return redirect()->action('OrganizadorCajasController@controlar');
+    }
+
     public function repartir(){
 
         return view('organizador.cajasRepartir', []);
@@ -52,7 +63,7 @@ class OrganizadorCajasController extends BaseController{
 
         $caja = Caja::find($id);
         $caja->estado_id ++;
-        //$caja->save();
+        $caja->save();
 
         if ($request->file('files') != null) {
             $files = $request->file('files');
@@ -66,7 +77,7 @@ class OrganizadorCajasController extends BaseController{
             }
         }
 
-        Session::flash('success', 'La caja fue entregada y las fotos o videos casrgados!');
+        Session::flash('success', 'La caja fue entregada y las fotos o videos cargados!');
 
         return redirect()->action('OrganizadorCajasController@repartir');
     }

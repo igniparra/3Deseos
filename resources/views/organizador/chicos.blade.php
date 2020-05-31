@@ -31,7 +31,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nombre</th>
-                                        <th class="text-center">Fecha Nacimiento</th>
+                                        <th class="text-center">Nacimiento</th>
                                         <th class="text-center">Edad</th>
                                         <th>Gustos</th>
                                         <th>Observaciones</th>
@@ -69,7 +69,7 @@
                                 <thead>
                                     <tr>
                                         <th>Nombre</th>
-                                        <th class="text-center">Fecha Nacimiento</th>
+                                        <th class="text-center">Nacimiento</th>
                                         <th class="text-center">Edad</th>
                                         <th>Gustos</th>
                                         <th>Observaciones</th>
@@ -112,7 +112,7 @@
                                 {{ Form::label('', "Nombre *") }}
                                 {{ Form::text('nombre', null, ['required' => "required", 'placeholder' => 'Ana Copi', 'class'=>'form-control']) }}
                                 <br>
-                                {{ Form::label('fecha', "Fecha de Nacimiento *") }}
+                                {{ Form::label('fecha', "Nacimiento *") }}
                                 {{ Form::text('fecha', null, ['required' => "required", 'class'=>'fecha form-control']) }}
                                 <br>
                                 {{ Form::label('', "Gustos *") }}
@@ -144,7 +144,9 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Aca te vamos a explicar todo lo que no entiendas....</p>
+                        <p>Debes agregar cada niñ@ por separado agregando su nombre completo, fecha de nacimiento, qué le gusta (la caja de su cumpleaños va a ser de esta temática), y observaciones (si debemos saber algo especial sobre el niñ@).<br><br>
+                            Una vez que hayas agregado todos los datos, haces click en "Guardar" y el niñ@ aparecerá cargado en la lista de la izquierda.<br><br>
+                            Si te equivocaste o el niñ@ ya no está en tu organización, hacés click sobre la X bajo "desactivar".</p>
                     </div>
                 </div>
             </div>

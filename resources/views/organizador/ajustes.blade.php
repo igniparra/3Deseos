@@ -19,7 +19,7 @@
     </div>
     <div class="row">
         @if(Auth::User()->nombre == NULL || $edit != NULL)
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         @else
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
         @endif
@@ -30,10 +30,12 @@
                 </div>
             </div>
             <div class="card-body">
+                <img class="img img-circle" src="{{URL::asset(Auth::User()->img)}}" width="100">
+                <hr>
                 <strong><i class="fas fa-user mr-1"></i>Nombre</strong>
                 <p class="text-muted">{{ Auth::User()->name }}</p>
                 <hr>
-                <strong><i class="fas fa-mail mr-1"></i>Correo Electronico</strong>
+                <strong><i class="fas fa-envelope mr-1"></i>Correo Electronico</strong>
                 <p class="text-muted">{{ Auth::User()->email }}</p>
             </div>
         </div>
@@ -76,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             @if(Auth::User()->nombre == NULL)
                 <div class="card">
                     <div class="card-header no-border">
@@ -89,13 +91,13 @@
                             <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
                             <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
                                 {{ Form::open(['route' => 'organizador.ajustes.guardar', 'method'=>'POST', 'files'=> true]) }}
-                                {{ Form::label('', "Nombre de la Organización *") }}
+                                {{ Form::label('', "Nombre *") }}
                                 {{ Form::text('nombre', null, ['required' => "required", 'placeholder' => 'Los Piletones', 'class'=>'form-control']) }}
                                 <br>
                                 {{ Form::label('categoria', "Tipo de Organización *") }}
                                 {{ Form::select('categoria', ['ONG'=>'ONG', 'Comedor Barrial'=>'Comedor Barrial'], null, ['required' => 'required', 'placeholder' => 'Selecciona un Tipo', 'class'=>'form-control']) }}
                                 <br>
-                                {{ Form::label('', "Direccion de la Organización *") }}
+                                {{ Form::label('', "Direccion*") }}
                                 {{ Form::text('direccion', null, ['required' => "required", 'placeholder' => 'Calle 1234, Barrio 31, CABA.', 'class'=>'form-control']) }}
                                 <br>
                                 {{ Form::label('', "Telefono *") }}
@@ -106,7 +108,7 @@
                                 <br>
                                 {{ Form::label('', "Estatuto o Alta Municipal *") }}
                                 <br>
-                                {{ Form::file('file', array()) }}
+                                {{ Form::file('file', array()) }} 
                                 <br>
                                 <br>
                                 {{ Form::submit('Guardar', array('class'=> 'btn btn-success btn-lg btn-block')) }}
@@ -156,27 +158,6 @@
             @endif
         </div>
     </div>
-
-    @if(Auth::User()->nombre == NULL)
-        <!-- Start - Bienvenida Modal -->
-        <div class="modal fade" id="bienbenida" style="display: block;" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Bienvenido a 3 Deseos</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Antes que nada necesitamos que cargues los datos de tu Organización!</p>
-                        <p>Luego nuestro equipo va a verificar estos datos, y si esta todo bien, vas  apoder empezar a utilizar la plataforma.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End - Bienvenida Modal -->
-    @endif
 
     <!-- Ayuda -->
     <div class="modal show" id="ayuda" style="display: none;" aria-hidden="true">

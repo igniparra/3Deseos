@@ -31,24 +31,23 @@
                                 <thead>
                                     <tr>
                                         <th>Codigo</th>
-                                        <th>Estado</th>
                                         <th>Donante</th>
                                         <th>Niñ@</th>
                                         <th>Gusto</th>
                                         <th>Observacion</th>
-                                        <th>Controlar</th>
+                                        <th  class="text-center" colspan="2">Controlar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach (Auth::User()->cajasControlar() as $caja)
                                         <tr>
                                             <td>{{ sprintf('%04d', $caja->id) }}</td>
-                                            <td>{{ $caja->estado->nombre }} </td>
                                             <td>{{ $caja->donante->name }}</td>
                                             <td>{{ $caja->chico->nombre }}</td>
-                                            <td>{{ $caja->categoria->nombre }}</td>
+                                            <td>{{ $caja->chico->gusto->nombre }}</td>
                                             <td>{{ $caja->chico->observaciones }}</td>
-                                            <td class="text-center"><a href="{{ route('organizador.caja.validar', [$caja->id]) }}" onclick="return confirm('{{nickname()}} estas segur@ que la caja cumple los siquientes requerimientos? \n No objetos punzantes \n No alimentos vencidos, sólo alimentos cerrados al vacío \n No químicos ni tóxicos \n No objetos pequeños \n No fármacos \n No explosivos ni inflamables (ej. bengalas o encendedor) \n No basura ni residuos \n');" style="color:inherit;"><i class="fa fa-check fa-lg"></i></a></td>
+                                            <td>{{ Html::linkRoute('organizador.caja.validar', 'Validar', [$caja->id], array('class' => 'btn btn-success', 'onclick'=>"return confirm('Estas segur@ que la caja SI cumple todos los siquientes requerimientos? \\n No objetos punzantes \\n No alimentos vencidos, sólo alimentos cerrados al vacío \\n No químicos ni tóxicos \\n No objetos pequeños \\n No fármacos \\n No explosivos ni inflamables (ej. bengalas o encendedor) \\n No basuras ni residuos')")) }}</td>
+                                            <td>{{ Html::linkRoute('organizador.caja.reportar', 'Reportar', [$caja->id], array('class' => 'btn btn-danger', 'onclick'=>"return confirm('Estas segur@ que la caja NO cumple alguno de los siquientes requerimientos? \\n No objetos punzantes \\n No alimentos vencidos, sólo alimentos cerrados al vacío \\n No químicos ni tóxicos \\n No objetos pequeños \\n No fármacos \\n No explosivos ni inflamables (ej. bengalas o encendedor) \\n No basuras ni residuos')")) }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -72,8 +71,10 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Aca te vamos a explicar todo lo que no entiendas....</p>
-                    </div>
+                        <p>Una vez que la caja está lista, el donante la envía a tu organización y debes controlar que todo lo que está dentro de la caja es correcto.<br><br>
+                            Eso es lo que vas a hacer en esta pantalla. Presiona "validar" para que aparezca el listado de todo lo que tienes que controlar.<br><br>
+                            Si todo está bien, presionas "OK"; sino, presionas "Cancelar" y procedes a "Reportar" la caja haciendo click en "Reportar" y luego "OK". </p>
+                    </div> 
                 </div>
             </div>
         </div>

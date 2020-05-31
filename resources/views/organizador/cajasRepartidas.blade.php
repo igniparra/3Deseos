@@ -22,16 +22,15 @@
                 <div class="card">
                     <div class="card-header no-border">
                         <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Cajas</h3>
+                            <h3 class="card-title">Cajas Entregadas</h3>
                         </div>
                     </div>
                     <div class="card-body">
                         @if(count(Auth::User()->cajasRepartidas()))
-                            <table id="table" class="table table-hover nowrap" style="width:100%">
+                            <table id="table1" class="table table-hover nowrap" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>Codigo</th>
-                                        <th>Estado</th>
                                         <th>Donante</th>
                                         <th>Niñ@</th>
                                         <th>Gusto</th>
@@ -43,10 +42,9 @@
                                     @foreach (Auth::User()->cajasRepartidas() as $caja)
                                         <tr>
                                             <td>{{ sprintf('%04d', $caja->id) }}</td>
-                                            <td>{{ $caja->estado->nombre }} </td>
                                             <td>{{ $caja->donante->name }}</td>
                                             <td>{{ $caja->chico->nombre }}</td>
-                                            <td>{{ $caja->categoria->nombre }}</td>
+                                            <td>{{ $caja->chico->gusto->nombre }}</td>
                                             <td>{{ $caja->chico->observaciones }}</td>
                                             <td>
                                                 @foreach ($caja->archivos as $archivo)
@@ -59,7 +57,43 @@
                                 </tbody>
                             </table>
                         @else
-                            <div><br><p class="text-center">No Existen Cajas Cargadas</p><br></div>
+                            <div><br><p class="text-center">No Existen Cajas Entregadas</p><br></div>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header no-border">
+                        <div class="d-flex justify-content-between">
+                            <h3 class="card-title">Cajas Reportadas</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @if(count(Auth::User()->cajasReportadas()))
+                            <table id="table2" class="table table-hover nowrap" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Codigo</th>
+                                        <th>Donante</th>
+                                        <th>Niñ@</th>
+                                        <th>Gusto</th>
+                                        <th>Observacion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Auth::User()->cajasReportadas() as $caja)
+                                        <tr>
+                                            <td>{{ sprintf('%04d', $caja->id) }}</td>
+                                            <td>{{ $caja->donante->name }}</td>
+                                            <td>{{ $caja->chico->nombre }}</td>
+                                            <td>{{ $caja->chico->gusto->nombre }}</td>
+                                            <td>{{ $caja->chico->observaciones }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            <div><br><p class="text-center">No Existen Cajas Reportadas</p><br></div>
                         @endif
                     </div>
                 </div>
@@ -77,7 +111,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Aca te vamos a explicar todo lo que no entiendas....</p>
+                        <p>Todas las cajas que ya hayas repartido aparecen en el listado que ves en esta pantalla.</p>
                     </div>
                 </div>
             </div>
@@ -89,7 +123,7 @@
     {{--  Data Tables  --}}
     <script>
     $(document).ready(function() {
-        $('#table').DataTable( {
+        $('#table1').DataTable( {
             "columnDefs": [
                 { "orderable": false, "targets": [] }
             ],
@@ -99,6 +133,18 @@
             },
             "dom": "bfrt",
         } );
+
+        $('#table2').DataTable( {
+            "columnDefs": [
+                { "orderable": false, "targets": [] }
+            ],
+            "order": [[0, 'asc' ]],
+            "language": {
+                "search": "Buscar:",
+            },
+            "dom": "bfrt",
+        } );
+
     } );
     </script>
 @endsection

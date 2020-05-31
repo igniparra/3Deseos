@@ -15,7 +15,7 @@ class OrganizadorAjustesController extends BaseController{
         if($edit != null){
             $edit = Auth::User();
         }
-        
+
         return view('organizador.ajustes', ['edit'=>$edit]);
     }
 
@@ -43,7 +43,7 @@ class OrganizadorAjustesController extends BaseController{
         }
         $usuario->save();
 
-        Session::flash('success', 'Los datos fueron guardados exitosamente!');
+        Session::flash('success', 'Los datos fueron guardados exitosamente! Una vez que validemos los datos que cargsaste, podras comenzar a utilizar la aplicacion!');
 
         return redirect()->action('OrganizadorAjustesController@ajustes');
     }

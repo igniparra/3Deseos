@@ -187,7 +187,7 @@ $(document).ready(function() {
                 "previous":   "Anterior"
             },
         },
-        "pageLength": 10,
+        "pageLength": 50,
         //"dom": 'f<<t>p>'
         "dom": '<"top"f>rt<"bottom"p><"clear">'
     } );
@@ -213,7 +213,7 @@ $(document).ready(function() {
                 "previous":   "Anterior"
             },
         },
-        "pageLength": 10,
+        "pageLength": 50,
         //"dom": '<"top"f>rt<"bottom" p><"clear">'
         "dom": 'f<<t>p>'
     } );

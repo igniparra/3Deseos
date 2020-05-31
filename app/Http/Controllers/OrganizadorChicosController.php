@@ -33,7 +33,7 @@ class OrganizadorChicosController extends BaseController{
             'nombre'=>'required|max:100',
             'fecha'=>'required',
             'categoria_id'=>'required',
-            'observaciones'=>'required|max:500',
+            'observaciones'=>'max:500',
         ), $this->messages);
 
         $chico = new chico();

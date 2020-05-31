@@ -80,21 +80,51 @@ class User extends Authenticatable
 
     public function cajasPreparacion(){
         $cajas = Caja::where('estado_id', '<=', 8)->get();
+        foreach ($cajas as $key => $caja) {
+            if($caja->chico->organizacion_id != $this->id){
+                unset($cajas[$key]);
+            }
+        }
         return $cajas;
     }
 
     public function cajasControlar(){
         $cajas = Caja::where('estado_id', 9)->get();
+        foreach ($cajas as $key => $caja) {
+            if($caja->chico->organizacion_id != $this->id){
+                unset($cajas[$key]);
+            }
+        }
         return $cajas;
     }
 
     public function cajasRepartir(){
         $cajas = Caja::where('estado_id', 10)->get();
+        foreach ($cajas as $key => $caja) {
+            if($caja->chico->organizacion_id != $this->id){
+                unset($cajas[$key]);
+            }
+        }
         return $cajas;
     }
 
     public function cajasRepartidas(){
-        $cajas = Caja::where('estado_id', '>=', 11)->get();
+        $cajas = Caja::whereIn('estado_id', [11,12])->get();
+        foreach ($cajas as $key => $caja) {
+            if($caja->chico->organizacion_id != $this->id){
+                unset($cajas[$key]);
+            }
+        }
+        return $cajas;
+    }
+
+    public function cajasReportadas(){
+        $cajas = Caja::where('estado_id', 13)->get();
+        foreach ($cajas as $key => $caja) {
+            if($caja->chico->organizacion_id != $this->id){
+                unset($cajas[$key]);
+            }
+        }
         return $cajas;
     }
 }

@@ -45,14 +45,14 @@
                                             <td>{{ $caja->estado->nombre }} </td>
                                             <td>{{ $caja->donante->name }}</td>
                                             <td>{{ $caja->chico->nombre }}</td>
-                                            <td>{{ $caja->categoria->nombre }}</td>
+                                            <td>{{ $caja->chico->gusto->nombre }}</td>
                                             <td>{{ $caja->chico->observaciones }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                         @else
-                            <div><br><p class="text-center">No Existen Cajas Cargadas</p><br></div>
+                            <div><br><p class="text-center">No Existen Cajas en Preparacion</p><br></div>
                         @endif
                     </div>
                 </div>
@@ -69,8 +69,9 @@
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
-                    <div class="modal-body">
-                        <p>Aca te vamos a explicar todo lo que no entiendas....</p>
+                    <div class="modal-body"> 
+                        <p>Estas son las Cajas Mágicas que los donantes están armando.<br><br>
+                            Puedes ver el nombre del donante, el nombre del niñ@ a quien va dirigida la Caja y en qué etapa de preparación está.</p>
                     </div>
                 </div>
             </div>
