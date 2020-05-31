@@ -118,9 +118,11 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
       fotoCumpleañero{
         color: #838383;
         border-radius: 25px;
-        position: center;
-        z-index:30;
-        //shadow: 0px, 0px, 0px, 0px;
+        bottom.100px;
+        right:50px;
+        width: 200px;
+        height:400px;
+        position:absolute;
       }
       .butConfirCum{
         color: #b26aac;
@@ -301,43 +303,42 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
       }
       .purpleCard{
         margin: 15px;
-        padding: 50px;
-        padding-bottom:20px;
+        padding: 25px;
+        padding-bottom:10px;
         color: #fff;
         border-radius: 5px;
         background-color: #b26aac;
 
-        min-height:280px;
-        width: 63%;
+        width: 80%;
         display: block;
 
-        top:30px;
         position:relative;
         margin-left: auto;
         margin-right: auto;
 
         box-shadow: -4px 7px 14px 8px rgba(249,241,247,0.89);
       }
-      .imagenLogoTorta{
+      .imagenLogoGlobo{
           position: absolute;
-          bottom:10px;
-          right: 10px;
+          top:-3px;
+          right: 5px;
           height:150px;
-        }
-        .txtPerfil{
-          font-size: 20px;
-          margin-top: 30px;
-          margin-left: 50px;
+          z-index: 40;
         }
         .usernameBox{
           margin-bottom: 10px;
-           color: black;
+           color: #838383;
+           font-size:20px;
         }
         .tituloPerfil{
-          font-size: 25px;
+          font-size: 27px;
+          width:100%;
           color: #b26aac;
           font-weight:450;
           margin-bottom:20px;
+          border-bottom-style:solid;
+          border-bottom-color: #b26aac;
+          border-bottom-width: 1px;
         }
 
       .imagenRegalo{

@@ -22,34 +22,35 @@ class MiPerfil extends PolymerElement {
         }
       </style>
 
-      <paper-dialog class="fotoCumpleañero" id='photo'>
-          <div align="center";><img width="50%;"  src="./images/aloi.jpeg"></div><br>
+      <paper-dialog id='photo'>
+        <div class="fotoCumpleañero">
+          <div><img src="./images/aloi.jpg"></div><br>
           <paper-button dialog-confirm autofocus color="white;" on-tap='_cerrar'>Cerrar</paper-button>
+        </div>
       </paper-dialog>
 
       <div class="card">
-         <img class='imagenLogoTorta' src="./images/ImagenesPasos/tortaHola.png">
+         <img class='imagenLogoGlobo' src="./images/ImagenesPasos/ImagenPaso4.png">
          <div class="txtPerfil">
-            <div class="tituloPerfil">MI PERFIL</div>
-            <div class="usernameBox">mateo@gmail.com</div>
+            <div class="tituloPerfil">MI PERFIL<div class="usernameBox">mateo@gmail.com</div></div>
             <div class="purpleCard">
-              <div class="cantCajasM"><img class='imagenRegalo' src="./images/present.png">Cajas Entregadas</div>
+              <div class="cantCajasM"><img class='imagenRegalo' src="./images/presentW.png">Cajas Entregadas</div>
               <p>Aquí podrás ver tus cajas entregadas, y si fue posible, podrás ver una foto del/la cumpleañero/a recibiendo el regalo!</p>
               <table style="width:100%">
               <tr>
-                <th>Nombre</th>
-                <th>Le hiciste el regalo de</th>
-                <th>Foto</th>
+                <th align="right";>Nombre</th>
+                <th align="right">Le hiciste el regalo de</th>
+                <th align="right";>Foto</th>
               </tr>
               <tr>
-                <td align="center";>Javier</td>
-                <td align="center";>4 años</td>
-                <td align="center";>No</td>
+                <td align="right";>Javier</td>
+                <td align="right";>6 años</td>
+                <td align="right";>No</td>
               </tr>
               <tr>
-                <td align="center";>Natalia</td>
-                <td align="center";>6 años</td>
-                <td align="center";><paper-button dialog-confirm autofocus class="butConfirCum" on-tap='_ver'>Ver</paper-button></td>
+                <td align="right";>Aloi</td>
+                <td align="right";>9 años</td>
+                <td align="right";><paper-button dialog-confirm autofocus class="butConfirCum" on-tap='_ver'></paper-button>Ver</td>
               </tr>
             </table>
 
