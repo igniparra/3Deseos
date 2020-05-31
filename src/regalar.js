@@ -33,17 +33,37 @@ class Regalar extends PolymerElement {
         margin-bottom:20px;
         height:220px;
       }
+      .confirmarCumpleañero{
+        color: #838383;
+        border-radius: 25px;
+        width: 400px;
+        height:200px;
+        font-size: 13px;
+        font-weight: 400px;
+        position: absolute;
+        top: 200px;
+        left:280px;
+        z-index:30;
+        //shadow: 0px, 0px, 0px, 0px;
+      }
+      .butConfirCum{
+        color: #b26aac;
+      }
+      .piletonDropdow{
+        margin-bottom: 100px;
+        position: relative;
+      }
       </style>
       <app-localstorage-document 
           key="status" 
           data="{{status}}">
       </app-localstorage-document>
 
-      <paper-dialog id='actions'>
-        <h2>Desea confirmar que realizará de la CAJA MAGICA para {{nombreCumpleañero}}</h2>
+      <paper-dialog class="confirmarCumpleañero" id='actions'>
+        <h2>Desea confirmar que <br>realizará de la CAJA MAGICA para {{nombreCumpleañero}}</h2>
         <div class="buttons">
-          <paper-button dialog-dismiss>Decline</paper-button>
-          <paper-button dialog-confirm autofocus>Accept</paper-button>
+          <paper-button dialog-dismiss class="butConfirCum">Decline</paper-button>
+          <paper-button dialog-confirm autofocus class="butConfirCum">Accept</paper-button>
         </div>
       </paper-dialog>
 
@@ -52,12 +72,12 @@ class Regalar extends PolymerElement {
           <template is=dom-if if='{{_isItMe("1")}}'>
             <div class="contenedorFecha">
               <div class="indicacionFechaYOng"> Seleccione la fecha limite de envio de su CAJA MAGICA</div>
-              <date-picker class="inputDate" date="{{startDate}}"></date-picker>
+              <date-picker class="inputDate"  default="2020-05-30" date="{{startDate}}"></date-picker>
             </div>
-            <div class="indicacionFechaYOng"> {{_toArray(ongList)}} Seleccione la organizacion con la que desea involucrarse</div>
-            <paper-dropdown label="ONG" value="{{ongSelected}}" searchable multi>
+            <div class="indicacionFechaYOng">Seleccione la organizacion con la que desea involucrarse</div>
+            <paper-dropdown class="piletonDropdown" label="ONG" value="{{ongSelected}}" searchable multi>
                <template is="dom-repeat" items="{{_toArray(ongList)}}" as="item">
-                   <paper-item value$="[[item.val.nombre]]">[[item.val.nombre]]</paper-item>
+                   <paper-item value$="[[item.val.nombre]]" on-iron-select="_itemSelected">[[item.val.nombre]]</paper-item>
               </template>
            </paper-dropdown>
             <paper-button class="botonPaso continuar" toggles raised on-tap="_getIntereses">Continuar</paper-button>
@@ -203,7 +223,7 @@ class Regalar extends PolymerElement {
      return {
       status:{ 
         type:String,
-        value:"4",
+        value:"1",
         notify:true
       },
       ongList:{
@@ -221,10 +241,20 @@ class Regalar extends PolymerElement {
       startDate:{
         type: Date,
         notify:true
+      },
+      loaded:{
+        type: Boolean,
+        notify:true
       }
    };
  }
-
+  
+  _itemSelected(e) {
+    var selectedItem = e.target.selectedItem;
+    if (selectedItem) {
+      this.ongSelected=selectedItem
+    }
+  }
   _confirmation(){
     this.$.actions.open();
   }
@@ -279,6 +309,7 @@ class Regalar extends PolymerElement {
           if (xhr.readyState === 4 && xhr.status === 200) {
               var reply = JSON.parse(xhr.responseText);
               that.set('ongList', reply);
+              that.set('loaded',true);
           }
       };
       xhr.send();
@@ -299,8 +330,6 @@ class Regalar extends PolymerElement {
   _isItMe(s){
      if(s=="1"){
       this._getOng();
-    }else if(s=="2"){
-      this._getIntereses();
     }
 
     if(this.status==s){

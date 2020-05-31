@@ -31,6 +31,8 @@
     "@polymer/paper-dropdown-menu": "^3.1.0",
     "@polymer/paper-icon-button": "^3.0.0-pre.15",
     "@polymer/paper-input": "^3.2.1",
+    "@polymer/paper-item": "^3.0.1",
+    "@polymer/paper-listbox": "^3.0.1",
     "@polymer/polymer": "^3.0.0",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "paper-loginscreen": "^2.0.2"
