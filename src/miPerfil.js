@@ -43,12 +43,12 @@ class MiPerfil extends PolymerElement {
               </tr>
               <tr>
                 <td align="center";>Javier</td>
-                <td align="center";>6 años</td>
+                <td align="center";>4 años</td>
                 <td align="center";>No</td>
               </tr>
               <tr>
-                <td align="center";>Aloi</td>
-                <td align="center";>9 años</td>
+                <td align="center";>Natalia</td>
+                <td align="center";>6 años</td>
                 <td align="center";><paper-button dialog-confirm autofocus class="butConfirCum" on-tap='_ver'>Ver</paper-button></td>
               </tr>
             </table>

@@ -26,10 +26,10 @@ class Regalar extends PolymerElement {
         letter-spacing: 1px;
       }
       </style>
-      <app-localstorage-document
+      <!--app-localstorage-document
           key="status"
           data="{{status}}">
-      </app-localstorage-document>
+      </app-localstorage-document-->
 
       <app-localstorage-document
         key="page"
@@ -37,7 +37,7 @@ class Regalar extends PolymerElement {
       </app-localstorage-document>
 
       <paper-dialog class="confirmarCumpleañero" id='actions'>
-        <div class"txtCondir">Desea confirmar que realizará la CAJA MAGICA para Joaquin</div>
+        <div class="txtCondir">Desea confirmar que realizará la CAJA MAGICA para Joaquin</div>
         <div class="buttons">
           <paper-button dialog-dismiss class="butConfirCum" on_tap='_previousStatus'>No</paper-button>
           <paper-button dialog-confirm autofocus class="butConfirCum" on-tap='_nextStatus'>Si</paper-button>
@@ -318,7 +318,10 @@ class Regalar extends PolymerElement {
   }
 
   _goHome(){
-    this.set('page','miPerfil')
+    this.set('status',"1");
+    this.set('status1',true);
+    this.set('status12',false);
+    this.set('page','miPerfil');
   }
 
   _setStatusFalse(){

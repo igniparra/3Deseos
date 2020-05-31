@@ -86,7 +86,10 @@ class MyLogin extends PolymerElement {
       NewUsername:String,
       NewPassword:String,
       NewPasswordConfirm:String,
-      isLoggedIn:Boolean,
+      isLoggedIn:{
+        type:Boolean,
+        value:true
+      },
       isRegistrar:{
         type: Boolean,
         notify: true,
