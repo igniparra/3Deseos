@@ -17,45 +17,8 @@ class Regalar extends PolymerElement {
       <style include="shared-styles">
         :host {
           display: block;
-
           padding: 10px;
         }
-        .dot {
-          height: 100px;
-          width: 100px;
-          background-color:  #838383;
-          border-radius: 50%;
-          opacity: 0.5;
-          display: inline-block;
-        }
-        .stepNumber{
-          position: relative;
-          margin-left: 35px;
-          margin-top: 12px;
-          color: white;
-          font-size: 50px;
-          font-weight: 800;
-          background-color:transparent;
-        }
-      .continuar{
-        background-color:#b26aac;
-        color: white;
-        border-radius: 15px;
-        
-        position: relative;
-        float: right;
-        bottom:20px;
-        padding:5px;
-        height: 45px;
-        width: 120px;
-
-        cursor: pointer;
-
-        font-feature-settings: "liga" 0;
-        letter-spacing: 0.5px;
-        font-weight: 450;
-        font-size: 15px;
-      }
       </style>
       <app-localstorage-document 
           key="status" 
@@ -65,47 +28,110 @@ class Regalar extends PolymerElement {
         <p>
           <template is=dom-if if='{{_isItMe("1")}}'>
           <div>seleccionar ong y una fecha</div>
+          <paper-button class="continuar" toggles raised>Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("2")}}'>
           seleccione un niño por intereses
+          <paper-button class="botonPaso volverAtras" toggles raised>Retornar</paper-button>
+          <paper-button class="continuar" toggles raised>Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("3")}}'>
           <div>
-            <span class="dot"><div class="stepNumber">1</div></span>
-            Consigue una caja de mínimo 20 x 20 x 10 cm
+            <img class="imagenNum" src="./images/numeros/numeros-pasos-01.png">
+            <div class="instruccionTxt">
+              <div class="tituloPaso">Consigue un caja</div>
+              <div class="descripcionPaso">Para que entre todo, ésta debe medir como mínimo 20 x 20 x10</div>
+            </div>
           </div>
-          <paper-button class="continuar" toggles raised>Continuar</paper-button>
+           <paper-button class="botonPaso volverAtras" toggles raised>Retornar</paper-button>
+          <paper-button class="botonPaso continuar" toggles raised>Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("4")}}'>
-          2- Elije el juego e imprímelo. Incluye una tijera para niños, pegamento de papel y  lápices de colores. 
+          <div>
+            <img class="imagenNum" src="./images/numeros/numeros-pasos-02.png">
+             <div class="instruccionTxt">
+              <div class="tituloPaso">Consigue un caja</div>
+              <div class="descripcionPaso">Para que entre todo, ésta debe medir como mínimo 20 x 20 x10</div>
+            </div>
+          </div>
+          <paper-button class="botonPaso volverAtras" toggles raised>Retornar</paper-button>
+          <paper-button class="continuar" toggles raised>Continuar</paper-button> 
           </template>
 
           <template is=dom-if if='{{_isItMe("5")}}'>
-          3- Elije e imprime la identificación  del cumpleañero que más te guste (corona, bonete o medalla)
+          <div>
+            <img class="imagenNum" src="./images/numeros/numeros-pasos-03.png">
+            <div class="instruccionTxt">
+              <div class="tituloPaso">Consigue un caja</div>
+              <div class="descripcionPaso">Para que entre todo, ésta debe medir como mínimo 20 x 20 x10</div>
+            </div>
+          </div>
+          <paper-button class="botonPaso volverAtras" toggles raised>Retornar</paper-button>
+          <paper-button class="continuar" toggles raised>Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("6")}}'>
-          4- Agrega el cotillón que más te guste (ej.: globos, confetti, banderines)
+          <div>
+            <img class="imagenNum" src="./images/numeros/numeros-pasos-04.png">
+             <div class="instruccionTxt">
+              <div class="tituloPaso">Consigue un caja</div>
+              <div class="descripcionPaso">Para que entre todo, ésta debe medir como mínimo 20 x 20 x10</div>
+            </div>
+          </div>
+          <paper-button class="botonPaso volverAtras" toggles raised>Retornar</paper-button>
+          <paper-button class="continuar" toggles raised>Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("7")}}'>
-          5- Agrega una torta, budín o cupcake. Recuerda que debe estar cerrado al vacío.
+          <div>
+            <img class="imagenNum" src="./images/numeros/numeros-pasos-05.png">
+             <div class="instruccionTxt">
+              <div class="tituloPaso">Consigue un caja</div>
+              <div class="descripcionPaso">Para que entre todo, ésta debe medir como mínimo 20 x 20 x10</div>
+            </div>
+          </div>
+          <paper-button class="botonPaso volverAtras" toggles raised>Retornar</paper-button>
+          <paper-button class="continuar" toggles raised>Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("8")}}'>
-          6- ¡Es el momento de agregar la velita! Este paso es muy importante para poder pedir los 3 deseos. 
+          <div>
+            <img class="imagenNum" src="./images/numeros/numeros-pasos-06.png">
+            <div class="instruccionTxt">
+              <div class="tituloPaso">Consigue un caja</div>
+              <div class="descripcionPaso">Para que entre todo, ésta debe medir como mínimo 20 x 20 x10</div>
+            </div>
+          </div>
+          <paper-button class="botonPaso volverAtras" toggles raised>Retornar</paper-button>
+          <paper-button class="continuar" toggles raised>Continuar</paper-button> 
           </template>
   
 
           <template is=dom-if if='{{_isItMe("9")}}'>
-          7- Puedes agregar una carta, postal, dibujo, foto o mensaje especial para tu cumpleañero. 
+          <div>
+            <img class="imagenNum" src="./images/numeros/numeros-pasos-07.png">
+             <div class="instruccionTxt">
+              <div class="tituloPaso">Consigue un caja</div>
+              <div class="descripcionPaso">Para que entre todo, ésta debe medir como mínimo 20 x 20 x10</div>
+            </div>
+          </div>
+          <paper-button class="botonPaso volverAtras" toggles raised>Retornar</paper-button>
+          <paper-button class="continuar" toggles raised>Continuar</paper-button> 
           </template>
 
           <template is=dom-if if='{{_isItMe("10")}}'>
-          8- Cierra la caja, imprime la etiqueta y colócala en la parte superior de la caja.
+          <div>
+            <img class="imagenNum" src="./images/numeros/numeros-pasos-08.png">
+            <div class="instruccionTxt">
+              <div class="tituloPaso">Consigue un caja</div>
+              <div class="descripcionPaso">Para que entre todo, ésta debe medir como mínimo 20 x 20 x10</div>
+            </div>
+          </div>
+          <paper-button class="botonPaso volverAtras" toggles raised>Retornar</paper-button>
+          <paper-button class="continuar" toggles raised>Continuar</paper-button>
           </template>
 
         </p>

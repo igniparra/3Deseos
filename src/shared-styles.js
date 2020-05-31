@@ -65,6 +65,12 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
       }
       a.textMenu{
         margin-top:5px;
+        color:white;
+      }
+      .menuDrawer{
+        height:100%;
+        background-color:#b26aac;
+        color:white;
       }
 
       .drawer-list a {
@@ -76,7 +82,7 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
       }
 
       .drawer-list a.iron-selected {
-        color: black;
+        color: white;
         font-weight: bold;
       }
 
@@ -128,6 +134,9 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
       app-toolbar.menu{
         background-color:#f47a20;
         letter-spacing: 1.3px;
+        font-size: 23px;
+        height: 62px;
+        color:white;
       }
       .fondoDeTres{
         left:55px;
@@ -180,6 +189,27 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         height:20px;
         margin-right:6px;
       }
+      .imagenMenu{
+        height:30px;
+        margin-top: 8px;
+        
+      }
+      .imagenLogOut{
+        height:30px;
+        margin-top:-10px;
+      }
+      .imagenNum{
+          height: 100px;
+          width: 100px;
+          position:relative;
+          float:left;
+          margin-top: -10px;
+      }
+       .textMenu{
+        margin-top: -45px;
+        margin-left: 40px;
+        color:white;
+      }
 
       paper-input.data {
         --paper-input-container-underline-focus: { display: none; };
@@ -187,6 +217,13 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         --paper-input-container-focus-color:#f47a20;
         --paper-input-container-input-color: black;
         --paper-input-container-invalid-color:#b26aac;
+      }
+
+      .logout{
+        font-size: 13.5px;
+        top:22px;
+        right:10px;
+        position:absolute;
       }
 
        paper-dialog.regisCard{
@@ -239,6 +276,58 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         .txtRegis{
           font-size: 13px;
           margin-top: 70px;
+        }
+        .stepNumber{
+          position: relative;
+          margin-left: 35px;
+          margin-top: 12px;
+          color: white;
+          font-size: 50px;
+          font-weight: 800;
+          background-color:transparent;
+        }
+
+      .botonPaso{
+        background-color:#b26aac;
+        color: white;
+        border-radius: 17px;
+        
+        position: absolute; 
+        bottom:32px; 
+        padding:5px;
+        height: 47px;
+        width: 120px;
+
+        box-shadow: 0px 0px 0px 0px;
+        cursor: pointer;
+
+        font-feature-settings: "liga" 0;
+        letter-spacing: 0.5px;
+        font-weight: 450;
+        font-size: 15px;
+      }
+
+      .volverAtras{
+        opacity: 0.9;
+        left:32px;
+      }
+
+      .continuar{ 
+        right:32px;
+      }
+      .instruccionTxt{
+        position:relative;
+        float:left;
+        margin-left: 30px;
+        top: 7px;
+      }
+      .descripcionPaso{
+          color: black;
+      }
+      .tituloPaso{
+          color: black;
+          font-size: 30px;
+          font-weight: 450;
         }
 
     </style>

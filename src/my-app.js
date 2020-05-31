@@ -60,20 +60,23 @@
          <!-- Drawer content -->
 
         <app-drawer id="drawer" slot="drawer" swipe-open="[[narrow]]">
-           <app-toolbar class="menu">Menu</app-toolbar>
+           <app-toolbar class="menu"> &nbsp;Menu</app-toolbar>
            <template is=dom-if if='{{isLoggedIn}}'>
-           <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-             <a class="textMenu" name="view1" href="[[rootPath]]view1"><img class="imagenRegalo" src="./images/present.png">Quienes somos</a>
-             <a class="textMenu" name="miPerfil" href="[[rootPath]]miPerfil"><img class="imagenRegalo" src="./images/present.png">Mi Perfil</a>
-             <a class="textMenu" name="Arma tu caja magica" href="[[rootPath]]regalar"><img class="imagenRegalo" src="./images/present.png">Regalar</a>
+           <div class="menuDrawer">
+           <iron-selector  selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
+             <a name="view1" href="[[rootPath]]view1"><img class="imagenMenu" src="./images/cake.png"><div class="textMenu">Quienes somos</div></a>
+             <a name="miPerfil" href="[[rootPath]]miPerfil"><img class="imagenMenu" src="./images/hat.png"><div class="textMenu">Mi Perfil</div></a>
+             <a name="Arma tu caja magica" href="[[rootPath]]regalar"><img class="imagenMenu" src="./images/presentW.png"><div class="textMenu">Regalar</div></a>
            </iron-selector>
+           </div>
            </template>
            <template is=dom-if if='{{!isLoggedIn}}'>
+            <div class="menuDrawer">
              <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-               <a class="textMenu" name="view1" href="[[rootPath]]view1">Quienes somos</a>
-               <a class="textMenu" name="login" href="[[rootPath]]login">Ingresar</a>
+               <a name="view1" href="[[rootPath]]view1"><img class="imagenMenu" src="./images/cake.png"><div class="textMenu">Quienes somos</div></a>
+               <a name="login" href="[[rootPath]]login"><img class="imagenMenu" src="./images/hat.png"><div class="textMenu">Ingresar</div></a>
+            </div>
            </template>
-           <img class="fondoDeTres" src="./images/background.png">
          </app-drawer>
 
          <!-- Main content -->
@@ -89,7 +92,7 @@
                  <div id="purple2"></div>
                  <div id="orange"></div>
                </div>
-               <paper-button class='logout' hidden$="{{!isLoggedIn}}" on-tap='logout'>Cerrar Sesión</paper-button>
+               <paper-button class='logout' hidden$="{{!isLoggedIn}}" on-tap='logout'><img class="imagenLogOut" src="./images/iconoLogOut.png"></paper-button>
              </app-toolbar>
            </app-header>
 
@@ -153,7 +156,7 @@
 
    changeRoute() {
      var $router = this.shadowRoot.querySelector("app-location");
-     $router.path = "/login";
+     $router.path = "/view1";
    }
 
    _loginStatusChanged(isLoggedIn){
