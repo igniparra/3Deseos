@@ -10,6 +10,7 @@
 
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import './shared-styles.js';
+import '../node_modules/@fooloomanzoo/datetime-picker/date-picker.js';
 
 class Regalar extends PolymerElement {
   static get template() {
@@ -17,45 +18,8 @@ class Regalar extends PolymerElement {
       <style include="shared-styles">
         :host {
           display: block;
-
           padding: 10px;
         }
-        .dot {
-          height: 100px;
-          width: 100px;
-          background-color:  #838383;
-          border-radius: 50%;
-          opacity: 0.5;
-          display: inline-block;
-        }
-        .stepNumber{
-          position: relative;
-          margin-left: 35px;
-          margin-top: 12px;
-          color: white;
-          font-size: 50px;
-          font-weight: 800;
-          background-color:transparent;
-        }
-      .continuar{
-        background-color:#b26aac;
-        color: white;
-        border-radius: 15px;
-        
-        position: relative;
-        float: right;
-        bottom:20px;
-        padding:5px;
-        height: 45px;
-        width: 120px;
-
-        cursor: pointer;
-
-        font-feature-settings: "liga" 0;
-        letter-spacing: 0.5px;
-        font-weight: 450;
-        font-size: 15px;
-      }
       </style>
       <app-localstorage-document 
           key="status" 
@@ -64,48 +28,138 @@ class Regalar extends PolymerElement {
       <div class="card">
         <p>
           <template is=dom-if if='{{_isItMe("1")}}'>
-          <div>seleccionar ong y una fecha</div>
+            <div class="contenedorFecha">
+              <div class="indicacionFechaYOng">Seleccione la fecha limite de envio de su CAJA MAGICA</div>
+              <date-picker class="inputDate"></date-picker>
+            </div>
+            <div class="indicacionFechaYOng">Seleccione la organizacion con la que desea involucrarse</div>
+            <paper-dropdown-menu label="ong">
+              <paper-listbox slot="dropdown-content" selected="1">
+                <template is="dom-repeat" items="{{_toArray(ongList)}}">
+                <paper-item>[[item.val]]</paper-item>
+                </template>
+              <paper-listbox>
+            <paper-dropdown-menu>
+
+            <paper-button class="botonPaso continuar" toggles raised>Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("2")}}'>
-          seleccione un niño por intereses
+            <div class="indicacionFechaYOng">Seleccione la tematica de su CAJA MAGICA para hacerla personalizada</div>
+            <paper-dropdown-menu label="intereses">
+              <paper-listbox slot="dropdown-content" selected="1">
+                <template is="dom-repeat" items="{{_toArray(interesesList)}}">
+                <paper-item>[[item.val]]</paper-item>
+                </template>
+              <paper-listbox>
+            <paper-dropdown-menu>
+          <paper-button class="arrow" noink><</paper-button>
+          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("3")}}'>
           <div>
-            <span class="dot"><div class="stepNumber">1</div></span>
-            Consigue una caja de mínimo 20 x 20 x 10 cm
+            <img class="imagenNum" src="./images/numeros/numeros-pasos-01.png">
+            <div class="instruccionTxt">
+              <div class="tituloPaso">Consigue un caja</div>
+              <div class="descripcionPaso">Para que entre todo, ésta debe medir como mínimo 20 x 20 x10</div>
+            </div>
+             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso1.png">
           </div>
-          <paper-button class="continuar" toggles raised>Continuar</paper-button>
+          <paper-button class="arrow" noink><</paper-button>
+          <paper-button class="botonPaso continuar" toggles raised>Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("4")}}'>
-          2- Elije el juego e imprímelo. Incluye una tijera para niños, pegamento de papel y  lápices de colores. 
+          <div>
+            <img class="imagenNum" src="./images/numeros/numeros-pasos-03.png">
+             <div class="instruccionTxt">
+              <div class="tituloPaso">Elije el juego</div>
+              <div class="descripcionPaso">Recuerda chequear los intereses del niñ@ para descargar e imprimir el juego que le va a gustar con sus instrucciones de armado. Debes agregar tijera, pegamento de papel y lápices de colores</div>
+            </div>
+            <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso2.png">
+          </div>
+          <paper-button class="arrow" noink><</paper-button>
+          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button> 
           </template>
 
           <template is=dom-if if='{{_isItMe("5")}}'>
-          3- Elije e imprime la identificación  del cumpleañero que más te guste (corona, bonete o medalla)
+          <div>
+            <img class="imagenNum" src="./images/numeros/numeros-pasos-04.png">
+            <div class="instruccionTxt">
+              <div class="tituloPaso">Elije el distintivo</div>
+              <div class="descripcionPaso">Puedes elegir descargar e imprimir la corona, la medalla o el bonete</div>
+            </div>
+            <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso3.png">
+          </div>
+          <paper-button class="arrow" noink><</paper-button>
+          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("6")}}'>
-          4- Agrega el cotillón que más te guste (ej.: globos, confetti, banderines)
+          <div width="100%">
+            <img class="imagenNum" src="./images/numeros/numeros-pasos-05.png">
+             <div class="instruccionTxt">
+              <div class="tituloPaso">Agrega el cotillon</div>
+              <div class="descripcionPaso">Agrega golosinas y el cotillo que mas te guste. Ej: globos, confetti, banderines.</div>
+            </div>
+            <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso4.png">
+          </div>
+          <paper-button class="arrow" noink><</paper-button>
+          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("7")}}'>
-          5- Agrega una torta, budín o cupcake. Recuerda que debe estar cerrado al vacío.
+          <div>
+            <img class="imagenNum" src="./images/numeros/numeros-pasos-06.png">
+             <div class="instruccionTxt">
+              <div class="tituloPaso">Agrega la torta</div>
+              <div class="descripcionPaso">Puede ser una pequeña torta, budín o cupcake. Recuerda que debe estar cerrada al vacío y su fecha de vencimiento menor a 60 días.</div>
+            </div>
+            <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso5.png">
+          </div>
+          <paper-button class="arrow" noink><</paper-button>
+          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("8")}}'>
-          6- ¡Es el momento de agregar la velita! Este paso es muy importante para poder pedir los 3 deseos. 
+          <div>
+            <img class="imagenNum" src="./images/numeros/numeros-pasos-07.png">
+            <div class="instruccionTxt">
+              <div class="tituloPaso">¡Momento de los 3 deseos!</div>
+              <div class="descripcionPaso">Agrega una velita. Este paso es muy importante</div>
+            </div>
+            <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso6.png">
+          </div>
+          <paper-button class="arrow" noink><</paper-button>
+          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button> 
           </template>
   
 
           <template is=dom-if if='{{_isItMe("9")}}'>
-          7- Puedes agregar una carta, postal, dibujo, foto o mensaje especial para tu cumpleañero. 
+          <div>
+            <img class="imagenNum" src="./images/numeros/numeros-pasos-08.png">
+             <div class="instruccionTxt">
+              <div class="tituloPaso">Añade tu toque personal</div>
+              <div class="descripcionPaso">Puedes agregar una carta, postal, dibujo, foto o mensaje especial para tu cumplañero</div>
+            </div>
+            <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso7.png">
+          </div>
+          <paper-button class="arrow" noink><</paper-button>
+          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button> 
           </template>
 
           <template is=dom-if if='{{_isItMe("10")}}'>
-          8- Cierra la caja, imprime la etiqueta y colócala en la parte superior de la caja.
+          <div>
+            <img class="imagenNum" src="./images/numeros/numeros-pasos-09.png">
+            <div class="instruccionTxt">
+              <div class="tituloPaso">Cierra la caja</div>
+              <div class="descripcionPaso">Una vez cerrada la caja Mágica, imprime la etiqueta y colócala en la parte superior de la caja.</div>
+            </div>
+            <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso8.png">
+          </div>
+          <paper-button class="arrow" noink><</paper-button>
+          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
           </template>
 
         </p>
@@ -113,22 +167,77 @@ class Regalar extends PolymerElement {
     `;
   }
 
+  static get properties() {
+     return {
+      status:{ 
+        type:String,
+        value:"2"
+      },
+      ongList:{
+        type: Object,
+        notify:true
+      },
+     interesesList:{
+        type: Object,
+        notify:true
+      }
+     };
+   }
+
+    _getIntereses(){
+      var xhr = new XMLHttpRequest();
+      var url = "http://theserver.mynetgear.com:3000/api/getIntereses";
+      var that=this;
+      xhr.open("POST", url, true);//creo que deberia haber un get
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              var reply = JSON.parse(xhr.responseText);
+              that.set('interesesList', reply);
+          }
+      };
+      xhr.send();
+  }
+
+    _getOng(){
+      var xhr = new XMLHttpRequest();
+      var url = "http://theserver.mynetgear.com:3000/api/getOng";
+      var that=this;
+      xhr.open("POST", url, true);//creo que deberia haber un get
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              var reply = JSON.parse(xhr.responseText);
+              that.set('ongList', reply);
+          }
+      };
+      xhr.send();
+  }
+  _toArray(obj, deep) {
+      var array = [];
+      for (var key in obj) {
+        if (deep || obj.hasOwnProperty(key)) {
+          array.push({
+            key: key,
+            val: obj[key]
+          });
+        }
+      }
+      return array;
+    }
 
   _isItMe(s){
-    if(this.status==s){//cambiar 1 a s
+     if(s=="1"){
+      this._getOng();
+    }else if(s=="2"){
+      this._getIntereses();
+    }
+
+    if(this.status==s){
       return true;
     }else{
       return false;
     }
   }
-  static get properties() {
-     return {
-      status:{ 
-        type:String,
-        value:"3"
-      }
-     };
-   }
-  }
-
+}
 window.customElements.define('my-regalar', Regalar);

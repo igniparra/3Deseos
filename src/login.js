@@ -25,24 +25,6 @@ class MyLogin extends PolymerElement {
           color:#b26aac;
           font-size: 20px;
         }
-        .errorCard{
-
-          border:none;
-          border-style:solid;
-          border-width:0px;
-
-          background-color: transparent;
-          box-shadow: 0px 0px 0px 0px;
-          color: #f47a20;
-
-          position:relative;
-
-          font-size:13px;
-
-          margin-bottom:-70px;
-          margin-top:60px;
-          margin-left:0px;
-        }
 
       </style>
 
@@ -210,10 +192,6 @@ class MyLogin extends PolymerElement {
 
   _switchRegistrar(){
     this.isRegistrar=!this.isRegistrar;
-  }
-
-  _openErrorDialog(){
-    this.$.errorDialog.open();
   }
 
   _closeErrorDialog(){
