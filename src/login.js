@@ -25,24 +25,6 @@ class MyLogin extends PolymerElement {
           color:#b26aac;
           font-size: 20px;
         }
-        .errorCard{
-
-          border:none;
-          border-style:solid;
-          border-width:0px;
-
-          background-color: transparent;
-          box-shadow: 0px 0px 0px 0px;
-          color: #f47a20;
-
-          position:relative;
-
-          font-size:13px;
-
-          margin-bottom:-70px;
-          margin-top:60px;
-          margin-left:0px;
-        }
 
       </style>
 
@@ -55,13 +37,6 @@ class MyLogin extends PolymerElement {
         key="status"
         data="{{status}}">
       </app-localstorage-document>
-
-
-      <paper-dialog id=confirmationDialog>
-        Te enviamos un mail de confirmación a {{NewUsername}}
-        <paper-button raised class="buttonLogin" on-tap='_closeConfirmDialog'><img class="imagenRegalo" src="./images/present.png"/>ok</paper-button>
-      </paper-dialog>
-
 
       <paper-dialog class="regisCard" id=registerDialog>
         <h1>La felicidad está hecha para ser compartida, registrese</h1>
@@ -177,10 +152,6 @@ class MyLogin extends PolymerElement {
 
   _openErrorDialog(){
     this.$.errorDialog.open();
-  }
-
-  _closeConfirmDialog(){
-    this.$.confirmationDialog.close();
   }
 
   _closeErrorDialog(){

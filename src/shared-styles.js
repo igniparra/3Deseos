@@ -162,6 +162,24 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         padding:5px;
         top: -10px;
       }
+      .errorCard{
+
+          border:none;
+          border-style:solid;
+          border-width:0px;
+
+          background-color: transparent;
+          box-shadow: 0px 0px 0px 0px;
+          color: #f47a20;
+
+          position:relative;
+
+          font-size:13px;
+
+          margin-bottom:-70px;
+          margin-top:60px;
+          margin-left:0px;
+        }
 
       div.card{
         margin: 24px;
@@ -210,6 +228,15 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         margin-left: 40px;
         color:white;
       }
+      .inputDate{
+          --input-picker-background:white;
+          --input-picker-color:#838383;
+          --inner-input-focus-background:#828282;
+          --inner-input-focus-color:white;
+          --input-icon-width:0.8em;
+          --input-icon-height:0.8em;
+          --input-icon-padding:0.4em;
+        }
 
       paper-input.data {
         --paper-input-container-underline-focus: { display: none; };
@@ -298,23 +325,17 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         font-size: 15px;
       }
 
-      .volverAtras{
-        opacity: 0.9;
-        left:32px;
-
-        background-color:#b26aac;
-        color: white;
-        position: absolute; 
-        bottom:32px; 
-        height: 47px;
-        width: 10px;
-
-        box-shadow: 0px 0px 0px 0px;
-        cursor: pointer;
-
-        font-weight: 450;
-        font-size: 20px;
-      }
+     .arrow{
+          position: absolute;
+          left:-20px;
+          bottom:25px;
+          font-size:25px;
+        }
+        paper-button.arrow:hover {
+            font-size:26px;
+            bottom:24px;
+            left:-21px;
+        }
 
       .continuar{ 
         right:32px;
@@ -349,6 +370,15 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
           float:left;
           margin-top: -10px;
       }
+      .contenedorFecha{
+          margin-bottom: 20px;
+        }
+        .indicacionFechaYOng{
+          letter-spacing:1px;
+          margin-bottom: 15px;
+          font-size: 14px;
+          color: black;
+        }
 
     </style>
   </template>

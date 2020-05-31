@@ -10,6 +10,7 @@
 
 import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
 import './shared-styles.js';
+import '../node_modules/@fooloomanzoo/datetime-picker/date-picker.js';
 
 class Regalar extends PolymerElement {
   static get template() {
@@ -27,13 +28,32 @@ class Regalar extends PolymerElement {
       <div class="card">
         <p>
           <template is=dom-if if='{{_isItMe("1")}}'>
-          <div>seleccionar ong y una fecha</div>
-          <paper-button class="botonPaso continuar" toggles raised>Continuar</paper-button>
+            <div class="contenedorFecha">
+              <div class="indicacionFechaYOng">Seleccione la fecha limite de envio de su CAJA MAGICA</div>
+              <date-picker class="inputDate"></date-picker>
+            </div>
+            <div class="indicacionFechaYOng">Seleccione la organizacion con la que desea involucrarse</div>
+            <paper-dropdown-menu label="ong">
+              <paper-listbox slot="dropdown-content" selected="1">
+                <template is="dom-repeat" items="{{_toArray(ongList)}}">
+                <paper-item>[[item.val]]</paper-item>
+                </template>
+              <paper-listbox>
+            <paper-dropdown-menu>
+
+            <paper-button class="botonPaso continuar" toggles raised>Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("2")}}'>
-          seleccione un niño por intereses
-          <paper-button class="volverAtras" toggles raised><</paper-button>
+            <div class="indicacionFechaYOng">Seleccione la tematica de su CAJA MAGICA para hacerla personalizada</div>
+            <paper-dropdown-menu label="intereses">
+              <paper-listbox slot="dropdown-content" selected="1">
+                <template is="dom-repeat" items="{{_toArray(interesesList)}}">
+                <paper-item>[[item.val]]</paper-item>
+                </template>
+              <paper-listbox>
+            <paper-dropdown-menu>
+          <paper-button class="arrow" noink><</paper-button>
           <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
           </template>
 
@@ -42,11 +62,11 @@ class Regalar extends PolymerElement {
             <img class="imagenNum" src="./images/numeros/numeros-pasos-01.png">
             <div class="instruccionTxt">
               <div class="tituloPaso">Consigue un caja</div>
-              <div class="descripcionPaso">Para que entre todo, ésta debe medir como mínimo 20 x 20 x10jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj</div>
+              <div class="descripcionPaso">Para que entre todo, ésta debe medir como mínimo 20 x 20 x10</div>
             </div>
              <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso1.png">
           </div>
-
+          <paper-button class="arrow" noink><</paper-button>
           <paper-button class="botonPaso continuar" toggles raised>Continuar</paper-button>
           </template>
 
@@ -59,6 +79,7 @@ class Regalar extends PolymerElement {
             </div>
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso2.png">
           </div>
+          <paper-button class="arrow" noink><</paper-button>
           <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button> 
           </template>
 
@@ -71,6 +92,7 @@ class Regalar extends PolymerElement {
             </div>
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso3.png">
           </div>
+          <paper-button class="arrow" noink><</paper-button>
           <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
           </template>
 
@@ -83,6 +105,7 @@ class Regalar extends PolymerElement {
             </div>
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso4.png">
           </div>
+          <paper-button class="arrow" noink><</paper-button>
           <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
           </template>
 
@@ -95,6 +118,7 @@ class Regalar extends PolymerElement {
             </div>
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso5.png">
           </div>
+          <paper-button class="arrow" noink><</paper-button>
           <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
           </template>
 
@@ -107,6 +131,7 @@ class Regalar extends PolymerElement {
             </div>
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso6.png">
           </div>
+          <paper-button class="arrow" noink><</paper-button>
           <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button> 
           </template>
   
@@ -120,6 +145,7 @@ class Regalar extends PolymerElement {
             </div>
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso7.png">
           </div>
+          <paper-button class="arrow" noink><</paper-button>
           <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button> 
           </template>
 
@@ -132,6 +158,7 @@ class Regalar extends PolymerElement {
             </div>
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso8.png">
           </div>
+          <paper-button class="arrow" noink><</paper-button>
           <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
           </template>
 
@@ -140,22 +167,77 @@ class Regalar extends PolymerElement {
     `;
   }
 
-
-  _isItMe(s){
-    if(this.status==s){//cambiar 1 a s
-      return true;
-    }else{
-      return false;
-    }
-  }
   static get properties() {
      return {
       status:{ 
         type:String,
         value:"2"
+      },
+      ongList:{
+        type: Object,
+        notify:true
+      },
+     interesesList:{
+        type: Object,
+        notify:true
       }
      };
    }
+
+    _getIntereses(){
+      var xhr = new XMLHttpRequest();
+      var url = "http://theserver.mynetgear.com:3000/api/getIntereses";
+      var that=this;
+      xhr.open("POST", url, true);//creo que deberia haber un get
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              var reply = JSON.parse(xhr.responseText);
+              that.set('interesesList', reply);
+          }
+      };
+      xhr.send();
   }
 
+    _getOng(){
+      var xhr = new XMLHttpRequest();
+      var url = "http://theserver.mynetgear.com:3000/api/getOng";
+      var that=this;
+      xhr.open("POST", url, true);//creo que deberia haber un get
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              var reply = JSON.parse(xhr.responseText);
+              that.set('ongList', reply);
+          }
+      };
+      xhr.send();
+  }
+  _toArray(obj, deep) {
+      var array = [];
+      for (var key in obj) {
+        if (deep || obj.hasOwnProperty(key)) {
+          array.push({
+            key: key,
+            val: obj[key]
+          });
+        }
+      }
+      return array;
+    }
+
+  _isItMe(s){
+     if(s=="1"){
+      this._getOng();
+    }else if(s=="2"){
+      this._getIntereses();
+    }
+
+    if(this.status==s){
+      return true;
+    }else{
+      return false;
+    }
+  }
+}
 window.customElements.define('my-regalar', Regalar);
