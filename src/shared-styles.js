@@ -72,6 +72,51 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         background-color:#b26aac;
         color:white;
       }
+              .monstruito{
+          width:200px;;
+          position:relative;
+          margin-top: -20px;
+          margin-left:8%;
+          float:left;
+      }
+      .dataCumpleañero{
+        width:100%;
+        position:relative;
+        margin-bottom:20px;
+        height:220px;
+      }
+      .graciasTxt{
+          color:#b26aac;
+          font-weight:bold;
+          letter-spaciong:1.5px;
+          font-size:70px;
+          margin-left:24%;
+          margin-top:-30px;
+          margin-bottom: 5px;
+        }
+      .graciasImg{
+          height: 250px;
+          margin-left:27%;
+        }
+      .confirmarCumpleañero{
+        color: #838383;
+        border-radius: 25px;
+        width: 400px;
+        font-size: 13px;
+        font-weight: 400px;
+        position: absolute;
+        top: 200px;
+        left:280px;
+        z-index:30;
+        //shadow: 0px, 0px, 0px, 0px;
+      }
+      .butConfirCum{
+        color: #b26aac;
+      }
+      .piletonDropdow{
+        margin-bottom: 100px;
+        position: relative;
+      }
 
       .drawer-list a {
         display: block;
