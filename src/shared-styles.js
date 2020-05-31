@@ -85,6 +85,19 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         margin-bottom:20px;
         height:220px;
       }
+      .graciasTxt{
+          color:#b26aac;
+          font-weight:bold;
+          letter-spaciong:1.5px;
+          font-size:70px;
+          margin-left:24%;
+          margin-top:-30px;
+          margin-bottom: 5px;
+        }
+      .graciasImg{
+          height: 250px;
+          margin-left:27%;
+        }
       .confirmarCumpleañero{
         color: #838383;
         border-radius: 25px;

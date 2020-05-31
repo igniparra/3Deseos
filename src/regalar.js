@@ -20,17 +20,6 @@ class Regalar extends PolymerElement {
           display: block;
           padding: 10px;
         }
-        .graciasTxt{
-          color:#b26aac;
-          font-weight:600px;
-          font-size:70px;
-          margin-left:150px;
-          margin-bottom:50px;
-        }
-        .graciasImg{
-          height: 300px;
-          margin-left:130px;
-        }
       </style>
       <app-localstorage-document
           key="status"
