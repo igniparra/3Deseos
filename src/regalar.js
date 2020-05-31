@@ -74,6 +74,8 @@ class Regalar extends PolymerElement {
                 </template>
               <paper-listbox slot="dropdown-content" selected="1">
            </paper-dropdown-menu>
+           ONG Selected: {{ongSelected}}<br>
+           Fecha: {{startDate}}<br>
             <paper-button class="botonPaso continuar" toggles raised on-tap="_getIntereses">Continuar</paper-button>
           </template>
 
@@ -259,7 +261,7 @@ class Regalar extends PolymerElement {
       var url = "http://theserver.mynetgear.com:3000/api/getIntereses";
       var request = {
         startDate : this.startDate,
-        ongSelected : this.ongSelected
+        ongSelected : this.ongList[this.ongSelected]
       }
       var that=this;
       xhr.open("POST", url, true);//creo que deberia haber un get
