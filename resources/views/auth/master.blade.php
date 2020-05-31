@@ -41,7 +41,7 @@
     <div class="wrapper" id="app">
         <div class="login-box">
             <div class="login-logo">
-                <img src="/images/logo-color.png" height="150">
+                <img src="/images/logo-color.png" height="175">
             </div>
             @yield('content')
         </div>

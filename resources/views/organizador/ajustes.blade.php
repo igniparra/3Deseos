@@ -66,7 +66,7 @@
                         <p class="text-muted">{{ Auth::User()->cargo }}</p>
                         <hr>
                         <strong><i class="fas fa-certificate mr-1"></i>Certificado</strong>
-                        <p class="text-muted"><a href="{{ url(Auth::User()->certificado) }}" style="color:inherit;">Ver Certificado</a></p>
+                        <p class="text-muted"><a href="{{ url(Auth::User()->certificado) }}"  target="_blank"  style="color:inherit;">Ver Certificado</a></p>
                         <hr>
                         <strong><i class="fas fa-user-circle mr-1"></i>Validación de Cuenta</strong>
                         <p class="text-muted">{{ Auth::User()->valido ? "Cuenta Validada" : "Validación de cuenta en Proceso"}}</p>

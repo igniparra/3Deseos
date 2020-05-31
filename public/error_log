@@ -15,3 +15,8 @@
 [29-Oct-2019 03:47:51 UTC] PHP Fatal error:  Assignments can only happen to writable values in /home/yy6ntdykqapq/public_html/_domains/invita-me/plataforma/app/Http/Controllers/OrganizadorGastosController.php on line 14
 [17-May-2020 17:10:10 UTC] PHP Warning:  Unsupported declare 'strict_types' in /home/yy6ntdykqapq/public_html/_domains/invita-me/plataforma/vendor/zendframework/zend-diactoros/src/functions/create_uploaded_file.php on line 8
 [17-May-2020 17:10:11 UTC] PHP Parse error:  syntax error, unexpected ':', expecting '{' in /home/yy6ntdykqapq/public_html/_domains/invita-me/plataforma/vendor/zendframework/zend-diactoros/src/functions/create_uploaded_file.php on line 19
+[30-May-2020 16:47:58 UTC] PHP Fatal error:  Cannot redeclare App\User::cajasPreparacion() in /home/yy6ntdykqapq/public_html/_subdomains/tresdeseos/app/User.php on line 92
+[30-May-2020 16:48:05 UTC] PHP Fatal error:  Cannot redeclare App\User::cajasPreparacion() in /home/yy6ntdykqapq/public_html/_subdomains/tresdeseos/app/User.php on line 92
+[30-May-2020 16:48:15 UTC] PHP Fatal error:  Cannot redeclare App\User::cajasPreparacion() in /home/yy6ntdykqapq/public_html/_subdomains/tresdeseos/app/User.php on line 92
+[31-May-2020 01:46:24 UTC] PHP Fatal error:  Cannot use empty array elements in arrays in /home/yy6ntdykqapq/public_html/_subdomains/tresdeseos/storage/framework/views/44878e983fe87aea0f1bb8a8911ff7a92319c9d0.php on line 89
+[31-May-2020 01:46:51 UTC] PHP Fatal error:  Cannot use empty array elements in arrays in /home/yy6ntdykqapq/public_html/_subdomains/tresdeseos/storage/framework/views/44878e983fe87aea0f1bb8a8911ff7a92319c9d0.php on line 89

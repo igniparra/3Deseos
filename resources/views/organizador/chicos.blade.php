@@ -22,31 +22,69 @@
                 <div class="card">
                     <div class="card-header no-border">
                         <div class="d-flex justify-content-between">
-                            <h3 class="card-title">Niñ@s Cargados</h3>
+                            <h3 class="card-title">Niñ@s Activos</h3>
                         </div>
                     </div>
                     <div class="card-body">
-                        @if(count(Auth::User()->chicos))
-                            <table id="table" class="table table-hover nowrap" style="width:100%">
+                        @if(count(Auth::User()->chicosActivos))
+                            <table id="table1" class="table table-hover nowrap" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>Nombre</th>
-                                        <th class="text-center">Fecha de Nacimiento</th>
+                                        <th class="text-center">Fecha Nacimiento</th>
                                         <th class="text-center">Edad</th>
                                         <th>Gustos</th>
-                                        <th class="text-center" style="width: 80px;">Eliminar</th>
-                                        <th class="text-center" style="width: 80px;">Ver</th>
+                                        <th>Observaciones</th>
+                                        <th class="text-center" style="width: 80px;">Desactivar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (Auth::User()->chicos as $chico)
+                                    @foreach (Auth::User()->chicosActivos as $chico)
                                         <tr>
                                             <td>{{ $chico->nombre }}</td>
                                             <td class="text-center">{{ date("d/m/Y", strtotime($chico->fecha_nacimiento)) }} </td>
-                                            <td class="text-center">5</td>
+                                            <td class="text-center">{{ $chico->edad() }}</td>
                                             <td class="text-center">{{ $chico->gusto->nombre }}</td>
-                                            <td class="text-center"><a href="{{ route('organizador.chico.eliminar', $chico->id) }}" onclick="return confirm('{{nickname()}} estas seguro que desea eliminar el chic@ {{$chico->nombre}} ?');" style="color:inherit;"><i class="fa fa-trash fa-lg"></i></a></td>
-                                            <td class="text-center"><a href="{{ route('organizador.chico.ver', $chico->id) }}" style="color:inherit;"><i class="fa fa-eye fa-lg"></i></a></td>
+                                            <td class="text-center">{{ $chico->observaciones}}</td>
+                                            <td class="text-center"><a href="{{ route('organizador.chico.eliminar', $chico->id) }}" onclick="return confirm('{{nickname()}} estas seguro que desea desactivar el chic@ {{$chico->nombre}} ?');" style="color:inherit;"><i class="fa fa-times fa-lg"></i></a></td>
+                                            </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        @else
+                            <div><br><p class="text-center">No Existen Chicos Cargados</p><br></div>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-header no-border">
+                        <div class="d-flex justify-content-between">
+                            <h3 class="card-title">Niñ@s Inactivos</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        @if(count(Auth::User()->chicosInactivos))
+                            <table id="table2" class="table table-hover nowrap" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th class="text-center">Fecha Nacimiento</th>
+                                        <th class="text-center">Edad</th>
+                                        <th>Gustos</th>
+                                        <th>Observaciones</th>
+                                        <th class="text-center" style="width: 80px;">Activar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (Auth::User()->chicosInactivos as $chico)
+                                        <tr>
+                                            <td>{{ $chico->nombre }}</td>
+                                            <td class="text-center">{{ date("d/m/Y", strtotime($chico->fecha_nacimiento)) }} </td>
+                                            <td class="text-center">{{ $chico->edad() }}</td>
+                                            <td class="text-center">{{ $chico->gusto->nombre }}</td>
+                                            <td class="text-center">{{ $chico->observaciones}}</td>
+                                            <td class="text-center"><a href="{{ route('organizador.chico.activar', $chico->id) }}" onclick="return confirm('{{nickname()}} estas seguro que desea activar el chic@ {{$chico->nombre}} ?');" style="color:inherit;"><i class="fa fa-check fa-lg"></i></a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -56,6 +94,7 @@
                         @endif
                     </div>
                 </div>
+
             </div>
             <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                 <div class="card">
@@ -76,11 +115,11 @@
                                 {{ Form::label('fecha', "Fecha de Nacimiento *") }}
                                 {{ Form::text('fecha', null, ['required' => "required", 'class'=>'fecha form-control']) }}
                                 <br>
-                                {{ Form::label('', "Genero *") }}
-                                {{ Form::select('genero_id', $ddGeneros, null, ['required' => 'required', 'placeholder' => 'Selecciona un Genero', 'class'=>'form-control']) }}
-                                <br>
                                 {{ Form::label('', "Gustos *") }}
                                 {{ Form::select('categoria_id', $ddCategorias, null, ['required' => 'required', 'placeholder' => 'Selecciona un Gusto', 'class'=>'form-control']) }}
+                                <br>
+                                {{ Form::label('', "Observaciones") }}
+                                {{ Form::textarea('observaciones', null, ['placeholder' => 'Ej: Discapacidades, celiaquía, alergias, etc', 'size' => 'x3', 'class'=>'form-control']) }}
                                 <br>
                                 {{ Form::submit('Guardar', array('class'=> 'btn btn-success btn-lg btn-block')) }}
 
@@ -124,23 +163,28 @@
     </script>
 
     {{--  Data Tables  --}}
+
     <script>
     $(document).ready(function() {
-        $('#table').DataTable( {
+        $('#table1').DataTable( {
             "columnDefs": [
-                { "orderable": false, "targets": [1,4,5] }
+                { "orderable": false, "targets": [5] }
             ],
-            "order": [[ 0, 'asc' ]],
-            "scrollX": true,
+            "order": [[0, 'asc' ]],
             "language": {
-                "zeroRecords": "No existen Registros",
                 "search": "Buscar:",
             },
-            "pageLength": 1000,
-            "dom": '<<f><t>>',
-            //"responsive":true,
-            //"dom": 'f<<t>p>',
-            //"dom": '<"top"f>rt<"bottom"p><"clear">'
+            "dom": "bfrt",
+        } );
+        $('#table2').DataTable( {
+            "columnDefs": [
+                { "orderable": false, "targets": [5] }
+            ],
+            "order": [[0, 'asc' ]],
+            "language": {
+                "search": "Buscar:",
+            },
+            "dom": "bfrt",
         } );
     } );
     </script>

@@ -70,12 +70,31 @@ class User extends Authenticatable
         return $name[0];
     }
 
-    public function chicos(){
-        return $this->hasMany('App\Chico', 'organizacion_id', 'id');
+    public function chicosActivos(){
+        return $this->hasMany('App\Chico', 'organizacion_id', 'id')->where('activo', 1);
+    }
+
+    public function chicosInactivos(){
+        return $this->hasMany('App\Chico', 'organizacion_id', 'id')->where('activo', 0);
     }
 
     public function cajasPreparacion(){
-        $cajas = Caja::where('estado_id', 1)->get();
+        $cajas = Caja::where('estado_id', '<=', 8)->get();
+        return $cajas;
+    }
+
+    public function cajasControlar(){
+        $cajas = Caja::where('estado_id', 9)->get();
+        return $cajas;
+    }
+
+    public function cajasRepartir(){
+        $cajas = Caja::where('estado_id', 10)->get();
+        return $cajas;
+    }
+
+    public function cajasRepartidas(){
+        $cajas = Caja::where('estado_id', '>=', 11)->get();
         return $cajas;
     }
 }

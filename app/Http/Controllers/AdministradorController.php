@@ -27,7 +27,7 @@ class AdministradorController extends BaseController{
         }
         $usuarios = User::where('active', 1)->orderBy('name', 'asc')->get();
         $usuariosInactivos = User::where('active', 0)->orderBy('name', 'asc')->get();
-        $ddRoles = Role::orderBy('id', 'asc')->pluck('description','id')->take(2);
+        $ddRoles = Role::orderBy('id', 'asc')->pluck('description','id');
 
         return view('administrador.usuarios', ['usuarios' => $usuarios, 'usuariosInactivos' => $usuariosInactivos, 'usuarioEdit' => $usuarioEdit, 'ddRoles' => $ddRoles]);
     }
@@ -58,13 +58,16 @@ class AdministradorController extends BaseController{
         $userRol->save();
 
         $token = Password::getRepository()->create($usuario);
-
-        Mail::send('emails.nuevoUsuario', ['token' => $token, 'usuario' =>$usuario], function (Message $message) use ($usuario) {
-            $message->from('info@invita-me.com', 'Invita ME');
-            $message->to($usuario->email);
-            $message->subject($usuario->nikname.' Bienvenido a Invita ME');
-        });
-
+        try{
+            Mail::send('emails.nuevoUsuario', ['token' => $token, 'usuario' =>$usuario], function (Message $message) use ($usuario) {
+                $message->from('info@invita-me.com', 'Invita ME');
+                $message->to($usuario->email);
+                $message->subject($usuario->nikname.' Bienvenido a Invita ME');
+            });
+        }
+        catch(\Exception $e){
+            //
+        }
         Session::flash('success', 'El Usuario se genero exitosamente!<br>Le enviamo un email a '.nickname().' para que continue con la configuracion de su cuenta.');
 
         return redirect()->action('AdministradorController@usuarios');
@@ -164,121 +167,6 @@ class AdministradorController extends BaseController{
             $userRol->save();
         }
         return redirect()->action('AdministradorController@usuarios');
-    }
-
-    /* -------- Ayuda ----------*/
-    public function ayudas($edit = null, $ruta = null){
-        if($edit != null && $edit != 0){
-            $ayudaEdit = Ayuda::find($edit);
-            $ayudaRuta = null;
-        }elseif($ruta != null){
-            $ayudaRuta = Ayuda::find($ruta);
-            $ayudaEdit = null;
-        }else{
-            $ayudaEdit = null;
-            $ayudaRuta = null;
-        }
-        $ayudas = Ayuda::orderBy('id', 'desc')->paginate($this->pagination);
-        return view('administrador.ayudas', ['ayudass' => $ayudas, 'ayudaEdit' => $ayudaEdit, 'ayudaRuta' => $ayudaRuta]);
-    }
-
-    public function ayudaGuardar(Request $request){
-        $this->validate($request, array(
-            'titulo'=>'required|max:100',
-            'descripcion'=>'required|max:1000'
-        ), $this->messages);
-
-        $ayuda = new Ayuda;
-        $ayuda->titulo = $request->input('titulo');
-        $ayuda->descripcion = $request->input('descripcion');
-        $ayuda->save();
-
-        $ayudaRuta = new AyudaRuta;
-        $ayudaRuta->ayuda_id = $ayuda->id;
-        $ayudaRuta->ruta = $request->input('ruta');
-        $ayudaRuta->save();
-
-        Session::flash('success', 'La ayuda fue agregada exitosamente!');
-
-        return redirect()->action('AdministradorController@ayudas');
-    }
-
-    public function ayudaActualizar(Request $request, $id){
-        $this->validate($request, array(
-            'titulo'=>'max:100',
-            'descripcion'=>'max:1000',
-        ), $this->messages);
-
-        $ayuda = Ayuda::find($id);
-        $ayuda->titulo = $request->input('titulo');
-        $ayuda->descripcion = $request->input('descripcion');
-        $ayuda->save();
-
-        Session::flash('success', 'La ayuda se actualizo exitosamente!');
-
-        return redirect()->action('AdministradorController@ayudas');
-    }
-
-    public function ayudaEliminar($id){
-        $ayudaRuta = AyudaRuta::where('ayuda_id', $id)->delete();
-        $ayuda = Ayuda::find($id)->delete();
-        Session::flash('success', 'La ayuda fue eliminada exitosamente!');
-
-        return redirect()->action('AdministradorController@ayudas');
-    }
-
-    public function ayudaAgregarRuta(Request $request, $id){
-
-        $ayudaRuta = new AyudaRuta;
-        $ayudaRuta->ayuda_id = $id;
-        $ayudaRuta->ruta = $request->input('ruta');
-        $ayudaRuta->save();
-
-        Session::flash('success', 'La ruta fue agregada exitosamente!');
-
-        return redirect()->action('AdministradorController@ayudas', ['edit' => 0, 'ruta' => $id]);
-    }
-
-    public function ayudaEliminarRuta($id){
-        $idAux = AyudaRuta::find($id);
-        $ayudaRuta = AyudaRuta::find($id)->delete();
-        Session::flash('success', 'La ruta fue eliminada exitosamente!');
-
-        return redirect()->action('AdministradorController@ayudas', ['edit' => 0, 'ruta' => $idAux->ayuda_id]);
-    }
-
-    public function ayudaDirectaGuardar(Request $request){
-        $this->validate($request, array(
-            'titulo'=>'required|max:100',
-            'descripcion'=>'required|max:1000',
-            'ruta'=>'max:100',
-        ), $this->messages);
-
-        $ayuda = new Ayuda;
-        $ayuda->titulo = $request->input('titulo');
-        $ayuda->descripcion = $request->input('descripcion');
-        $ayuda->save();
-
-        $ayudaRuta = new AyudaRuta;
-        $ayudaRuta->ayuda_id = $ayuda->id;
-        $ayudaRuta->ruta = $request->input('ruta');
-        $ayudaRuta->save();
-
-        Session::flash('success', 'La ayuda fue agregada exitosamente!');
-
-        return redirect($request->input('rutaFullUrl'));
-    }
-
-    public function ayudaDirectaEliminar($idAyuda, $ruta, $rutaFull){
-        AyudaRuta::where('ayuda_id', $idAyuda)->where('ruta', $ruta)->delete();
-        $ayuda = Ayuda::find($idAyuda);
-        if(sizeof($ayuda->rutas) == 0){ // Si no tiene rutas, la elimino.
-            $ayuda->delete();
-        }
-
-        Session::flash('success', 'La ayuda fue eliminada exitosamente!');
-
-        return redirect(str_replace(',','/',$rutaFull));
     }
 
     // Var //

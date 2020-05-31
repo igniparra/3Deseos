@@ -19,6 +19,7 @@ class RedirectIfAuthenticated
     {
         if(Auth::guard($guard)->check()){
             if(Auth::user()->hasRole('administrador')){
+
                 return redirect()->route('administrador.usuarios');
             }
             if(Auth::user()->hasRole('organizador')){
@@ -29,7 +30,8 @@ class RedirectIfAuthenticated
                 }
             }
             if(Auth::user()->hasRole('usuario')){
-                return redirect()->route('usuario.invitados');
+                dd("no sos permitido");
+                return redirect()->route('organizador.home');
             }
         }
 

@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <a href="{{ route('organizador.home') }}" class="brand-link">
-        <img src="/images/sin-bordes-08.png" height="80">
+        <img src="/images/sin-bordes-10.png" height="70">
     </a>
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -24,43 +24,37 @@
                             <p>Tus Niñ@s</p>
                         </a>
                     </li>
-                    <li class="nav-item has-treeview">
+                    <li class="nav-item has-treeview active menu-open">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-box"></i>
                             <p>Cajas<i class="right fas fa-angle-left"></i></p>
                         </a>
-                        <ul class="nav nav-treeview" style="display: none;">
+                        <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <a href="{{ route('organizador.cajasPreparacion') }}" class="nav-link">
                                     &emsp;<i class="fas fa-circle nav-icon"></i>
-                                    <p>Cajas en Preparacion</p>
+                                    <p>En Preparacion</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('organizador.home', 1) }}" class="nav-link">
+                                <a href="{{ route('organizador.cajasControlar') }}" class="nav-link">
                                     &emsp;<i class="fas fa-circle nav-icon"></i>
-                                    <p>Cajas Para Controlar</p>
+                                    <p>Para Controlar</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('organizador.home', 1) }}" class="nav-link">
+                                <a href="{{ route('organizador.cajasRepartir') }}" class="nav-link">
                                     &emsp;<i class="fas fa-circle nav-icon"></i>
-                                    <p>Cajas Para Repartir</p>
+                                    <p>Para Repartir</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('organizador.home', 1) }}" class="nav-link">
+                                <a href="{{ route('organizador.cajasRepartidas') }}" class="nav-link">
                                     &emsp;<i class="fas fa-circle nav-icon"></i>
-                                    <p>Cajas Repartidas</p>
+                                    <p>Repartidas</p>
                                 </a>
                             </li>
                         </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('organizador.home') }}" class="nav-link">
-                            <i class="nav-icon fas fa-question-circle"></i>
-                            <p>Ayuda</p>
-                        </a>
                     </li>
                 @endif
                 <li class="nav-item">

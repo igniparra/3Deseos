@@ -6,17 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Caja extends Model{
 
-    public function evento(){
-        return $this->belongsTo('App\Evento', 'evento_id', 'id')->first();
+    public function donante(){
+        return $this->belongsTo('App\User', 'user_id', 'id');
     }
 
     public function estado(){
-        $estado = $this->belongsTo('App\MensajeEstado', 'estado_id', 'id')->get();
-        return $estado[0]->nombre;
+        return $this->belongsTo('App\CajaEstado', 'estado_id', 'id');
     }
 
-    public function envios(){
-        return $this->hasMany('App\WhatsappEnviado', 'mensaje_id', 'id');
+    public function chico(){
+        return $this->belongsTo('App\Chico', 'chico_id', 'id');
     }
 
+    public function categoria(){
+        return $this->belongsTo('App\Categoria', 'categoria_id', 'id');
+    }
+
+    public function archivos(){
+        return $this->hasMany('App\Archivo', 'caja_id', 'id');
+    }
 }

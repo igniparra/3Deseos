@@ -27,11 +27,18 @@
     // Chicos
     Route::get('/organizador/chicos', ['as' => 'organizador.chicos', 'uses' => 'OrganizadorChicosController@chicos', 'middleware' => 'roles', 'roles' => ['organizador']]);
     Route::get('/organizador/chico/eliminar/{id}', ['as' => 'organizador.chico.eliminar', 'uses' => 'OrganizadorChicosController@eliminar', 'middleware' => 'roles', 'roles' => ['organizador']]);
+    Route::get('/organizador/chico/activar/{id}', ['as' => 'organizador.chico.activar', 'uses' => 'OrganizadorChicosController@activar', 'middleware' => 'roles', 'roles' => ['organizador']]);
     Route::get('/organizador/chico/ver', ['as' => 'organizador.chico.ver', 'uses' => 'OrganizadorChicosController@ver', 'middleware' => 'roles', 'roles' => ['organizador']]);
     Route::post('/organizador/chico/guardar', ['as' => 'organizador.chico.guardar', 'uses' => 'OrganizadorChicosController@guardar', 'middleware' => 'roles', 'roles' => ['organizador']]);
 
     // Cajas
     Route::get('/organizador/cajasPreparacion', ['as' => 'organizador.cajasPreparacion', 'uses' => 'OrganizadorCajasController@preparacion', 'middleware' => 'roles', 'roles' => ['organizador']]);
+    Route::get('/organizador/cajasControlar', ['as' => 'organizador.cajasControlar', 'uses' => 'OrganizadorCajasController@controlar', 'middleware' => 'roles', 'roles' => ['organizador']]);
+    Route::get('/organizador/caja/validar/{id}', ['as' => 'organizador.caja.validar', 'uses' => 'OrganizadorCajasController@validar', 'middleware' => 'roles', 'roles' => ['organizador']]);
+    Route::get('/organizador/cajasRepartir', ['as' => 'organizador.cajasRepartir', 'uses' => 'OrganizadorCajasController@repartir', 'middleware' => 'roles', 'roles' => ['organizador']]);
+    Route::get('/organizador/caja/entregar/{id}', ['as' => 'organizador.caja.entregar', 'uses' => 'OrganizadorCajasController@entregar', 'middleware' => 'roles', 'roles' => ['organizador']]);
+    Route::post('/organizador/caja/files/{id}', ['as' => 'organizador.caja.files', 'uses' => 'OrganizadorCajasController@files', 'middleware' => 'roles', 'roles' => ['organizador']]);
+    Route::get('/organizador/cajasRepartidas', ['as' => 'organizador.cajasRepartidas', 'uses' => 'OrganizadorCajasController@repartidas', 'middleware' => 'roles', 'roles' => ['organizador']]);
 
     // Ayuda
 

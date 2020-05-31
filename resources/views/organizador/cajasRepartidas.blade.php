@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
-@section('title', 'Chic@s')
+@section('title', 'Cajas Repartidas')
 
 @section('content')
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                    <h1 class="m-0 text-dark">Cajas que se Están Preparando<small></small></h1>
+                    <h1 class="m-0 text-dark">Cajas Repartidas<small></small></h1>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <ol class="breadcrumb float-sm-right">
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        @if(count(Auth::User()->cajasPreparacion()))
+                        @if(count(Auth::User()->cajasRepartidas()))
                             <table id="table" class="table table-hover nowrap" style="width:100%">
                                 <thead>
                                     <tr>
@@ -36,10 +36,11 @@
                                         <th>Niñ@</th>
                                         <th>Gusto</th>
                                         <th>Observacion</th>
+                                        <th>Foto o Video</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (Auth::User()->cajasPreparacion() as $caja)
+                                    @foreach (Auth::User()->cajasRepartidas() as $caja)
                                         <tr>
                                             <td>{{ sprintf('%04d', $caja->id) }}</td>
                                             <td>{{ $caja->estado->nombre }} </td>
@@ -47,6 +48,12 @@
                                             <td>{{ $caja->chico->nombre }}</td>
                                             <td>{{ $caja->categoria->nombre }}</td>
                                             <td>{{ $caja->chico->observaciones }}</td>
+                                            <td>
+                                                @foreach ($caja->archivos as $archivo)
+                                                    <a href="{{ url($archivo->url) }}" target="_blank" style="color:inherit;"><i class="fas fa-file-image fa-lg"></i> </a>
+                                                @endforeach
+
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

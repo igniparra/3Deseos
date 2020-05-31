@@ -7,7 +7,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                    <h1 class="m-0 text-dark">Cajas que se Están Preparando<small></small></h1>
+                    <h1 class="m-0 text-dark">Cajas para Controlar<small></small></h1>
                     </div>
                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <ol class="breadcrumb float-sm-right">
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        @if(count(Auth::User()->cajasPreparacion()))
+                        @if(count(Auth::User()->cajasControlar()))
                             <table id="table" class="table table-hover nowrap" style="width:100%">
                                 <thead>
                                     <tr>
@@ -36,10 +36,11 @@
                                         <th>Niñ@</th>
                                         <th>Gusto</th>
                                         <th>Observacion</th>
+                                        <th>Controlar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach (Auth::User()->cajasPreparacion() as $caja)
+                                    @foreach (Auth::User()->cajasControlar() as $caja)
                                         <tr>
                                             <td>{{ sprintf('%04d', $caja->id) }}</td>
                                             <td>{{ $caja->estado->nombre }} </td>
@@ -47,6 +48,7 @@
                                             <td>{{ $caja->chico->nombre }}</td>
                                             <td>{{ $caja->categoria->nombre }}</td>
                                             <td>{{ $caja->chico->observaciones }}</td>
+                                            <td class="text-center"><a href="{{ route('organizador.caja.validar', [$caja->id]) }}" onclick="return confirm('{{nickname()}} estas segur@ que la caja cumple los siquientes requerimientos? \n No objetos punzantes \n No alimentos vencidos, sólo alimentos cerrados al vacío \n No químicos ni tóxicos \n No objetos pequeños \n No fármacos \n No explosivos ni inflamables (ej. bengalas o encendedor) \n No basura ni residuos \n');" style="color:inherit;"><i class="fa fa-check fa-lg"></i></a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -78,6 +80,9 @@
 @endsection
 
 @section('javascript')
+
+
+
 
     {{--  Data Tables  --}}
     <script>

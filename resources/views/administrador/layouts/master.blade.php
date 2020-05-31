@@ -6,7 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="csrf-token" content={{csrf_token()}}>
 
-    <title>Invita ME | @yield('title')</title>
+    <title>3 Deseos | @yield('title')</title>
     <link rel="stylesheet" href="/css/app.css"></link>
     <link rel="stylesheet" href="/dist/plugins/font-awesome/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -81,10 +81,30 @@
     <!-- AdminLTE for demo purposes -->
     <script src="/dist/js/demo.js"></script>
 
+    {{-- Alert Toster--}}
+    <script>
+    $( document ).ready(function() {
+        @if (session('success'))
+        toastr.success('{{session('success')}}');
+        @endif
+        @if (session('fail'))
+        toastr.error('{{session('fail')}}');
+        @endif
+        @if (session('warning'))
+        toastr.warning('{!! session('warning') !!}');
+        @endif
+        @if ($errors->any())
+        @foreach ($errors->all(':message') as $mensaje)
+        toastr.warning('{{$mensaje}}');
+        @endforeach
+        @endif
+    });
+    </script>
+
     <!-- Toaster -->
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js"></script>
-    
+
     <!-- Data Table -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>

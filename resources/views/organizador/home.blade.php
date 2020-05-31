@@ -21,7 +21,7 @@
             <div class="col-lg-6 col-12">
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>58</h3>
+                        <h3>{{ count(Auth::User()->chicos) }}</h3>
                         <p>Tus Niñ@s</p>
                     </div>
                     <div class="icon">
@@ -33,37 +33,37 @@
             <div class="col-lg-6 col-12">
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>53<sup style="font-size: 20px">%</sup></h3>
+                        <h3>{{ count(Auth::User()->cajasPreparacion()) }}</h3>
                         <p>Cajas que se Están Preparando</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-box-open"></i>
                     </div>
-                    <a href="{{ route('organizador.chicos') }}" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('organizador.cajasPreparacion') }}" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-6 col-12">
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>44</h3>
+                        <h3>{{ count(Auth::User()->cajasControlar()) }}</h3>
                         <p>Cajas Para Controlar</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-boxes"></i>
                     </div>
-                    <a href="{{ route('organizador.chicos') }}" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('organizador.cajasControlar') }}" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <div class="col-lg-6 col-12">
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>65</h3>
+                        <h3>{{ count(Auth::User()->cajasRepartir()) }}</h3>
                         <p>Cajas Para Repartir</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-box"></i>
                     </div>
-                    <a href="{{ route('organizador.chicos') }}" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('organizador.cajasRepartir') }}" class="small-box-footer">Mas info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
         </div>

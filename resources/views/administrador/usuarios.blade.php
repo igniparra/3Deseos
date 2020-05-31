@@ -1,6 +1,6 @@
 @extends('administrador.layouts.master')
 
-@section('title', 'Invitados')
+@section('title', 'Usuarios')
 
 @section('content')
     <div class="content-header">
@@ -34,7 +34,8 @@
                                     <th>Nombre</th>
                                     <th>Mail</th>
                                     <th class="text-center">Admin</th>
-                                    <th class="text-center">Organizador</th>
+                                    <th class="text-center">Org</th>
+                                    <th class="text-center">User</th>
                                     <th class="text-center" style="width: 80px;">LastLogIn</th>
                                     <th class="text-center" style="width: 80px;">ResetPass</th>
                                     <th class="text-center" style="width: 80px;">Editar</th>
@@ -49,6 +50,7 @@
                                         <td>{{ $usuario->email }}</td>
                                         <td class="text-center"><a href="{{ route('administrador.usuarioRol', [$usuario->id, 'rol'=>1, 'es'=>$usuario->hasRole('administrador')]) }}" style="color:inherit;"> {!! $usuario->hasRole('administrador') ? "<i class='fa fa-check'>&zwnj;</i>" : "<i class='fa fa-times'></i>"!!}</a></td>
                                         <td class="text-center"><a href="{{ route('administrador.usuarioRol', [$usuario->id, 'rol'=>2, 'es'=>$usuario->hasRole('organizador')]) }}" style="color:inherit;">{!! $usuario->hasRole('organizador') ? "<i class='fa fa-check'>&zwnj;</i>" : "<i class='fa fa-times'></i>"!!}</a></td>
+                                        <td class="text-center"><a href="{{ route('administrador.usuarioRol', [$usuario->id, 'rol'=>3, 'es'=>$usuario->hasRole('usuario')]) }}" style="color:inherit;">{!! $usuario->hasRole('usuario') ? "<i class='fa fa-check'>&zwnj;</i>" : "<i class='fa fa-times'></i>"!!}</a></td>
                                         <td class="text-center" data-toggle="tooltip" title="{{ date('d/m/y - H:i' , strtotime($usuario->last_logIn)) }}"><i class="fa fa-info-circle fa-lg"></i></td>
                                         <td class="text-center"><a href="{{ route('administrador.usuario.reset', [$usuario->id]) }}" onclick="return confirm('{{nickname()}} estas seguro que desea enviar un email a {{$usuario->name}} para que restablezca su contraseña?');" style="color:inherit;"><i class="fa fa-key fa-lg fa-rotate-90"></i></a></td>
                                         <td class="text-center"><a href="{{ route('administrador.usuarios', [$usuario->id]) }}" style="color:inherit;"><i class="fa fa-pencil-square-o fa-lg"></i></a></td>
@@ -107,18 +109,6 @@
                     <div class="row">
                         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
                         <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-                            @if ($errors->any())
-                                <div class=" alertt alertt-warning alertt-dismissible "role="alertt-warning">{!! implode('', $errors->all(':message')) !!}</p> </div>
-                            @endif
-                            @if (session('warning'))
-                                <div class="alertt alertt-warning alertt-dismissable" role="alert">{!! session('warning') !!}</div>
-                            @endif
-                            @if (session('fail'))
-                                <div class="alert alertt-danger alert-dismissable" role="alert">{!! session('fail') !!}</div>
-                            @endif
-                            @if (session('success'))
-                                <div class="alert alertt-success alert-dismissable" role="alert">{!! session('success') !!}</div>
-                            @endif
                             @if ($usuarioEdit == null)
                                 {{ Form::open(['route' => 'administrador.usuario.guardar', 'method'=>'POST', 'files'=> true]) }}
                             @else
@@ -179,7 +169,7 @@
 $(document).ready(function() {
     $('#usuariosActivos').DataTable( {
         "columnDefs": [
-            { "orderable": false, "targets": [0] }
+            { "orderable": false, "targets": [6,7,8,9] }
         ],
         "order": [[ 1, 'asc' ]],
         "scrollX": true,
@@ -205,7 +195,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     $('#usuariosInactivos').DataTable( {
         "columnDefs": [
-            { "orderable": false, "targets": [0] }
+            { "orderable": false, "targets": [3] }
         ],
         "order": [[ 1, 'asc' ]],
         "scrollX": true,

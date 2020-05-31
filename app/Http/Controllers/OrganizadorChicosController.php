@@ -22,10 +22,9 @@ class OrganizadorChicosController extends BaseController{
             $edit = Auth::User();
         }
 
-        $ddGeneros = Genero::pluck('nombre', 'id');
         $ddCategorias = Categoria::where('activa', 1)->pluck('nombre', 'id');
 
-        return view('organizador.chicos', ['edit'=>$edit, 'ddCategorias'=>$ddCategorias, 'ddGeneros'=>$ddGeneros]);
+        return view('organizador.chicos', ['edit'=>$edit, 'ddCategorias'=>$ddCategorias]);
     }
 
     public function guardar(Request $request){
@@ -33,15 +32,15 @@ class OrganizadorChicosController extends BaseController{
         $this->validate($request, array(
             'nombre'=>'required|max:100',
             'fecha'=>'required',
-            'genero_id'=>'required',
             'categoria_id'=>'required',
+            'observaciones'=>'required|max:500',
         ), $this->messages);
 
         $chico = new chico();
         $chico->organizacion_id = Auth::User()->id;
         $chico->nombre = $request->input('nombre');
+        $chico->observaciones = $request->input('observaciones');
         $chico->fecha_nacimiento = date("Y-m-d H:i:s", strtotime($request->input('fecha')));
-        $chico->genero_id = $request->input('genero_id');
         $chico->categoria_id = $request->input('categoria_id');
         $chico->save();
 
@@ -75,10 +74,24 @@ class OrganizadorChicosController extends BaseController{
 
     public function eliminar($id){
 
-        Chico::find($id)->delete();
+        $chico = Chico::find($id);
+        $chico->activo = 0;
+        $chico->save();
         // Chek q no tenga Cajas
 
-        Session::flash('success', 'El chico fue eliminado exitosamente!');
+        Session::flash('success', 'El chico fue desactivado exitosamente!');
+
+        return redirect()->action('OrganizadorChicosController@chicos');
+    }
+
+    public function activar($id){
+
+        $chico = Chico::find($id);
+        $chico->activo = 1;
+        $chico->save();
+        // Chek q no tenga Cajas
+
+        Session::flash('success', 'El chico fue activado exitosamente!');
 
         return redirect()->action('OrganizadorChicosController@chicos');
     }

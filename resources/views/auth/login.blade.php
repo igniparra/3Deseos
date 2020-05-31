@@ -18,9 +18,7 @@
                     </div>
                 </div>
                 <div class="input-group mb-3">
-
                     {{ Form::password('password', ['required' => "required", 'placeholder'=>'Contraseña', 'class'=>'form-control']) }}
-
                     <div class="input-group-append">
                         <span class="fa fa-lock input-group-text"></span> @if ($errors->has('password'))
                             <span class="invalid-feedback" role="alert">
