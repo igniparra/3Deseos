@@ -115,6 +115,13 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         z-index:30;
         //shadow: 0px, 0px, 0px, 0px;
       }
+      fotoCumpleañero{
+        color: #838383;
+        border-radius: 25px;
+        position: center;
+        z-index:30;
+        //shadow: 0px, 0px, 0px, 0px;
+      }
       .butConfirCum{
         color: #b26aac;
       }
@@ -292,6 +299,25 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         z-index: 2;
 
       }
+      .purpleCard{
+        margin: 15px;
+        padding: 50px;
+        padding-bottom:20px;
+        color: #fff;
+        border-radius: 5px;
+        background-color: #b26aac;
+
+        min-height:280px;
+        width: 63%;
+        display: block;
+
+        top:30px;
+        position:relative;
+        margin-left: auto;
+        margin-right: auto;
+
+        box-shadow: -4px 7px 14px 8px rgba(249,241,247,0.89);
+      }
       .imagenLogoTorta{
           position: absolute;
           bottom:10px;
@@ -321,13 +347,13 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
       .imagenMenu{
         height:30px;
         margin-top: 8px;
-        
+
       }
       .imagenLogOut{
         height:30px;
         margin-top:-10px;
       }
-  
+
        .imagenDescPaso{
           max-whith:240px;
           margin-top:15px;
@@ -336,7 +362,7 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
           margin-left: auto;
           margin-right: auto;
         }
-      
+
        .textMenu{
         margin-top: -45px;
         margin-left: 40px;
@@ -425,14 +451,14 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
           font-size: 13px;
           margin-top: 70px;
         }
-      
+
       .botonPaso{
         background-color:#b26aac;
         color: white;
         border-radius: 17px;
-        
-        position: absolute; 
-        bottom:32px; 
+
+        position: absolute;
+        bottom:32px;
         padding:5px;
         height: 47px;
         width: 120px;
@@ -458,7 +484,7 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
             left:-21px;
         }
 
-      .continuar{ 
+      .continuar{
         right:32px;
       }
       .instruccionTxt{

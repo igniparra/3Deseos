@@ -61,7 +61,7 @@ class MyLogin extends PolymerElement {
 
       <template is=dom-if if='{{!isRegistrar}}'>
       <div class="card">
-        <h1>Ingrese para sacar sorisas</h1>
+        <h1>Ingrese para sacar sonrisas</h1>
         <paper-input class='data' style='data' name='username' type='email' focused='true' label='Ingrese su email' value='{{username::input}}'>
         </paper-input>
         <br>
