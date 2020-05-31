@@ -88,7 +88,7 @@ class Regalar extends PolymerElement {
                 </template>
               <paper-listbox>
             <paper-dropdown-menu>
-          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
+          <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           <!--Se debe llamar a la funcion que elige un niño aleatoriamente-->
           </template>
 
@@ -114,8 +114,8 @@ class Regalar extends PolymerElement {
             </div>
              <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso1.png">
           </div>
-          <paper-button class="arrow" noink><</paper-button>
-          <paper-button class="botonPaso continuar" toggles raised on-tap="_nextStatus">Continuar</paper-button>
+          <paper-button class="arrow" noink on-tap="_previousStatus"><</paper-button>
+          <paper-button class="botonPaso continuar" toggles raised on-tap="_nextStatus" on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("5")}}'>
@@ -127,8 +127,8 @@ class Regalar extends PolymerElement {
             </div>
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso2.png">
           </div>
-          <paper-button class="arrow" noink><</paper-button>
-          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
+          <paper-button class="arrow" noink on-tap="_previousStatus"><</paper-button>
+          <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("6")}}'>
@@ -140,8 +140,8 @@ class Regalar extends PolymerElement {
             </div>
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso3.png">
           </div>
-          <paper-button class="arrow" noink><</paper-button>
-          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
+          <paper-button class="arrow" noink on-tap="_previousStatus"><</paper-button>
+          <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("7")}}'>
@@ -153,8 +153,8 @@ class Regalar extends PolymerElement {
             </div>
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso4.png">
           </div>
-          <paper-button class="arrow" noink><</paper-button>
-          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
+          <paper-button class="arrow" noink on-tap="_previousStatus"><</paper-button>
+          <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("8")}}'>
@@ -166,8 +166,8 @@ class Regalar extends PolymerElement {
             </div>
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso5.png">
           </div>
-          <paper-button class="arrow" noink><</paper-button>
-          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
+          <paper-button class="arrow" noink on-tap="_previousStatus"><</paper-button>
+          <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("9")}}'>
@@ -179,8 +179,8 @@ class Regalar extends PolymerElement {
             </div>
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso6.png">
           </div>
-          <paper-button class="arrow" noink><</paper-button>
-          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
+          <paper-button class="arrow" noink on-tap="_previousStatus"><</paper-button>
+          <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
 
@@ -193,8 +193,8 @@ class Regalar extends PolymerElement {
             </div>
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso7.png">
           </div>
-          <paper-button class="arrow" noink><</paper-button>
-          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
+          <paper-button class="arrow" noink on-tap="_previousStatus"><</paper-button>
+          <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
           <template is=dom-if if='{{_isItMe("11")}}'>
@@ -206,8 +206,8 @@ class Regalar extends PolymerElement {
             </div>
             <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso8.png">
           </div>
-          <paper-button class="arrow" noink><</paper-button>
-          <paper-button class="continuar botonPaso" toggles raised>Continuar</paper-button>
+          <paper-button class="arrow" noink on-tap="_previousStatus" on-tap="_previousStatus"><</paper-button>
+          <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
         </p>
@@ -219,7 +219,7 @@ class Regalar extends PolymerElement {
      return {
       status:{
         type:String,
-        value:"1",
+        value:"4",
         notify:true
       },
       ongList:{
@@ -274,6 +274,7 @@ class Regalar extends PolymerElement {
       };
       var data = JSON.stringify({request});
       xhr.send(data);
+      _nextStatus();
   }
   _nextStatus(){
       var xhr = new XMLHttpRequest();
@@ -283,16 +284,35 @@ class Regalar extends PolymerElement {
         status: nextSt
       }
       var that=this;
-      xhr.open("POST", url, true);//creo que deberia haber un get
+      xhr.open("POST", url, true);
       xhr.setRequestHeader("Content-Type", "application/json");
-      /*xhr.onreadystatechange = function () {
+      xhr.onreadystatechange = function () {
           if (xhr.readyState === 4 && xhr.status === 200) {
               var reply = JSON.parse(xhr.responseText);
               that.set('status', reply);
           }
-      };*/
+      };
       this.status=nextSt;
-      window.alert(this.status);
+      var data = JSON.stringify({request});
+      xhr.send(data);
+  }
+   _previousStatus(){
+      var xhr = new XMLHttpRequest();
+      var url = "http://theserver.mynetgear.com:3000/api/changeStatus";
+      var nextSt=(parseInt(this.status)-1).toString();
+      var request = {
+        status: nextSt
+      }
+      var that=this;
+      xhr.open("POST", url, true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              var reply = JSON.parse(xhr.responseText);
+              that.set('status', reply);
+          }
+      };
+      this.status=nextSt;
       var data = JSON.stringify({request});
       xhr.send(data);
   }
