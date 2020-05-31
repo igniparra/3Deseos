@@ -162,6 +162,17 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         padding:5px;
         top: -10px;
       }
+      .decripCumpleañero{
+        position:relative;
+        float:left;
+        color:black;
+        margin-left:40px;
+        margin-top:10px;
+      }
+      .nombreCumpleañero{
+        font-size: 25px;
+        margin-bottom:5px;
+      }
       .errorCard{
 
           border:none;
