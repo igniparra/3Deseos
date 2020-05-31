@@ -116,17 +116,20 @@ Date.prototype.getWeek = function (dowOffset) {
 
 app.post('/api/getIntereses', (req, res) =>{ //TODO
   const ong = req.body.request.ongSelected;
-  console.log("ong: "+ong);
+  //console.log(util.inspect(ong, showHidden=false, depth=2, colorize=true));
   const startDate = new Date(req.body.request.startDate);
-  console.log("fecha: "+startDate);
   var startWeek=startDate.getWeek();
   var endWeek=startDate.getWeek()+4;
   //var interests = [];
-  db.query('SELECT categorias.nombre from categorias inner join chicos on categorias.id=chicos.categoria_id WHERE organizacion_id=? and weekofyear(chicos.fecha_nacimiento) BETWEEN ? and ?',[ong,startWeek,endWeek], function (error, results, fields) {
-    console.log(error);
-    if (error) throw error;
-    res.send(results);
-    console.log(util.inspect(results, showHidden=false, depth=2, colorize=true));
+  db.query('SELECT id from users WHERE nombre=?',[ong.nombre], function (error, results, fields) {
+    //console.log(util.inspect(results, showHidden=false, depth=2, colorize=true));
+    var ongId=results[0].id;
+    db.query('SELECT DISTINCT categorias.nombre from categorias inner join chicos on categorias.id=chicos.categoria_id WHERE organizacion_id=? and weekofyear(chicos.fecha_nacimiento) BETWEEN ? and ?',[ongId,startWeek,endWeek], function (error, results, fields) {
+      console.log(error);
+      if (error) throw error;
+      res.send(results);
+      console.log(util.inspect(results, showHidden=false, depth=2, colorize=true));
+    });
   });
 })
 
