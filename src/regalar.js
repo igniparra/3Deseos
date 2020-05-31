@@ -20,6 +20,11 @@ class Regalar extends PolymerElement {
           display: block;
           padding: 10px;
         }
+      .txtCondir{
+        color:red;
+        font-size: 22px;
+        letter-spacing: 1px;
+      }
       </style>
       <app-localstorage-document
           key="status"
@@ -27,7 +32,7 @@ class Regalar extends PolymerElement {
       </app-localstorage-document>
 
       <paper-dialog class="confirmarCumpleañero" id='actions'>
-        <h2 class"txtCondir">Confirma que realizará la CAJA MAGICA a Joaquin</h2>
+        <div class"txtCondir">Desea confirmar que realizará la CAJA MAGICA para Joaquin</div>
         <div class="buttons">
           <paper-button dialog-dismiss class="butConfirCum" on_tap='_previousStatus'>No</paper-button>
           <paper-button dialog-confirm autofocus class="butConfirCum" on-tap='_nextStatus'>Si</paper-button>
@@ -55,7 +60,7 @@ class Regalar extends PolymerElement {
 
           <template is=dom-if if='{{status2}}'>
             <div class="indicacionFechaYOng">Seleccione la tematica de su CAJA MAGICA para hacerla personalizada</div>
-              <paper-listbox slot="dropdown-content" selected="{{selectedInterest}}">
+              <paper-listbox class="interesesSelector" slot="dropdown-content" selected="{{selectedInterest}}">
                 <template is="dom-repeat" items="{{_toArray(interesesList)}}">
                 <paper-item>[[item.val.nombre]]</paper-item>
                 </template>

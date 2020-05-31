@@ -30,6 +30,11 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
 
         display: block;
       }
+      .interesesSelector{
+          --paper-listbox-background-color:#f47a20;
+          border-radious:15px;
+          color:white;
+      }
 
       app-drawer-layout:not([narrow]) [drawer-toggle] {
         display: none;
@@ -324,9 +329,12 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
       }
   
        .imagenDescPaso{
-          width:70%;
+          max-whith:240px;
           margin-top:15px;
           margin-bottom: 80px;
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
         }
       
        .textMenu{
@@ -388,7 +396,7 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
             border-color:#b26aac;
          };
         }
-       
+
       paper-button.buttonLink{
           border-width: 0px;
           background-color: transparent;
