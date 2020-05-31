@@ -10,7 +10,9 @@
 
  import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
  import { setPassiveTouchGestures, setRootPath } from '@polymer/polymer/lib/utils/settings.js';
- import "@elifent/paper-datepicker/paper-datepicker.js"
+ import {mixinBehaviors} from '@polymer/polymer/lib/legacy/class.js';
+ import {NeonAnimatableBehavior} from '@polymer/neon-animation/neon-animatable-behavior.js';
+ import "@elifent/paper-datepicker/paper-datepicker.js";
  import '@polymer/app-layout/app-drawer/app-drawer.js';
  import '@polymer/paper-dropdown-menu/paper-dropdown-menu.js';
  import '@polymer/paper-item/paper-item.js';

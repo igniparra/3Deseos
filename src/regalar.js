@@ -67,11 +67,13 @@ class Regalar extends PolymerElement {
               <date-picker class="inputDate"  default="2020-05-30" date="{{startDate}}"></date-picker>
             </div>
             <div class="indicacionFechaYOng">Seleccione la organizacion con la que desea involucrarse</div>
-            <paper-dropdown class="piletonDropdown" label="ONG" value="{{ongSelected}}" searchable multi>
-               <template is="dom-repeat" items="{{_toArray(ongList)}}" as="item">
-                   <paper-item value$="[[item.val.nombre]]" on-iron-select="_itemSelected">[[item.val.nombre]]</paper-item>
-              </template>
-           </paper-dropdown>
+            <paper-dropdown-menu class="piletonDropdown" label="ONG" no-animations="true">
+              <paper-listbox slot="dropdown-content" selected="{{ongSelected}}">
+                <template is="dom-repeat" items="{{_toArray(ongList)}}" as="item">
+                     <paper-item>[[item.val.nombre]]</paper-item>
+                </template>
+              <paper-listbox slot="dropdown-content" selected="1">
+           </paper-dropdown-menu>
             <paper-button class="botonPaso continuar" toggles raised on-tap="_getIntereses">Continuar</paper-button>
           </template>
 
