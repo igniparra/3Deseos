@@ -20,26 +20,12 @@ class MiPerfil extends PolymerElement {
 
           padding: 10px;
         }
-        .imagenLogoTorta{
-          position: absolute;
-          top:10px;
-          right: 10px;
-          height:200px;
-        }
-        .txtPerfil{
-          font-size: 20px;
-          margin-top: 50px;
-          margin-left: 50px;
-        }
-        .usernameBox{
-          margin-bottom: 10px;
-           color: black;
-        }
       </style>
 
       <div class="card">
-         <img class='imagenLogoTorta' src="./images/Logo3DeseosTorta.jpg">
+         <img class='imagenLogoTorta' src="./images/ImagenesPasos/tortaHola.png">
          <div class="txtPerfil">
+            <div class="tituloPerfil">MI PERFIL</div>
             <div class="usernameBox">mateo@gmail.com</div>
             <div class="cantCajasM"><img class='imagenRegalo' src="./images/present.png"> 1 CAJA MAGICA</div>
          <div>

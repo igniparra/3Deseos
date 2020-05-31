@@ -242,6 +242,27 @@ $_documentContainer.innerHTML = `<dom-module id="shared-styles">
         z-index: 2;
 
       }
+      .imagenLogoTorta{
+          position: absolute;
+          bottom:10px;
+          right: 10px;
+          height:150px;
+        }
+        .txtPerfil{
+          font-size: 20px;
+          margin-top: 30px;
+          margin-left: 50px;
+        }
+        .usernameBox{
+          margin-bottom: 10px;
+           color: black;
+        }
+        .tituloPerfil{
+          font-size: 25px;
+          color: #b26aac;
+          font-weight:450;
+          margin-bottom:20px;
+        }
 
       .imagenRegalo{
         height:20px;
