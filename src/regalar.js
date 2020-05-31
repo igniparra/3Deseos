@@ -59,6 +59,14 @@ class Regalar extends PolymerElement {
           data="{{status}}">
       </app-localstorage-document>
 
+      <paper-dialog class="confirmarCumpleañero" id='actions'>
+        <h2>Desea confirmar que <br>realizará de la CAJA MAGICA para Joaquin</h2>
+        <div class="buttons">
+          <paper-button dialog-dismiss class="butConfirCum" on_tap='_previousStatus'>No</paper-button>
+          <paper-button dialog-confirm autofocus class="butConfirCum" on-tap='_nextStatus'>Si</paper-button>
+        </div>
+      </paper-dialog>
+      
       <div class="card">
         <p>
           <template is=dom-if if='{{status1}}'>
@@ -73,7 +81,7 @@ class Regalar extends PolymerElement {
                 <template is="dom-repeat" items="{{_toArray(ongList)}}" as="item">
                      <paper-item>[[item.val.nombre]]</paper-item>
                 </template>
-              <paper-listbox slot="dropdown-content" selected="1">
+              </paper-listbox>
            </paper-dropdown-menu>
             <paper-button class="botonPaso continuar" toggles raised on-tap="_getIntereses">Continuar</paper-button>
           </template>
@@ -82,9 +90,10 @@ class Regalar extends PolymerElement {
             <div class="indicacionFechaYOng">Seleccione la tematica de su CAJA MAGICA para hacerla personalizada</div>
               <paper-listbox slot="dropdown-content" selected="{{selectedInterest}}">
                 <template is="dom-repeat" items="{{_toArray(interesesList)}}">
-                <paper-item>[[item.val]]</paper-item>
+                <paper-item>[[item.val.nombre]]</paper-item>
                 </template>
               <paper-listbox>
+          <paper-button class="arrow" noink on-tap="_previousStatus"><</paper-button>
           <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
           <!--Se debe llamar a la funcion que elige un niño aleatoriamente-->
           </template>
@@ -99,6 +108,7 @@ class Regalar extends PolymerElement {
               <div>Soy celiaco</div>
             </div>
           </div>
+          <paper-button class="arrow" noink on-tap="_previousStatus"><</paper-button>
           <paper-button class="continuar botonPaso" raised on-tap='_confirmation'>Continuar</paper-button>
           </template>
 
@@ -111,7 +121,6 @@ class Regalar extends PolymerElement {
             </div>
              <img class='imagenDescPaso' src="./images/ImagenesPasos/ImagenPaso1.png">
           </div>
-          <paper-button class="arrow" noink on-tap="_previousStatus"><</paper-button>
           <paper-button class="botonPaso continuar" toggles raised on-tap="_nextStatus" on-tap="_nextStatus">Continuar</paper-button>
           </template>
 
@@ -142,7 +151,7 @@ class Regalar extends PolymerElement {
           </template>
 
           <template is=dom-if if='{{status7}}'>
-          <div width="100%">
+          <div>
             <img class="imagenNum" src="./images/numeros/numeros-pasos-05.png">
              <div class="instruccionTxt">
               <div class="tituloPaso">Agrega el cotillon</div>
@@ -242,6 +251,11 @@ class Regalar extends PolymerElement {
         notify:true
       },
 
+      nombreCumpleañero:{
+        type: String,
+        value:"Joaquin"
+      },
+
       loaded:{
         type: Boolean,
         notify:true
@@ -295,6 +309,11 @@ class Regalar extends PolymerElement {
         type: Boolean,
         value: false,
         notify:true
+      },
+      status11:{
+        type: Boolean,
+        value: false,
+        notify:true
       }
    };
  }
@@ -321,6 +340,7 @@ class Regalar extends PolymerElement {
     this.set('status8',false);
     this.set('status9',false);
     this.set('status10',false);
+    this.set('status11',false);
   }
 
   _setStatusTrue(s){
@@ -354,6 +374,9 @@ class Regalar extends PolymerElement {
         break;
       case '10':
         this.set('status10',true);
+        break;
+      case '11':
+        this.set('status11',true);
         break;
     }
 
