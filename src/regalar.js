@@ -66,7 +66,7 @@ class Regalar extends PolymerElement {
           <paper-button dialog-confirm autofocus class="butConfirCum" on-tap='_nextStatus'>Si</paper-button>
         </div>
       </paper-dialog>
-      
+
       <div class="card">
         <p>
           <template is=dom-if if='{{status1}}'>
@@ -314,6 +314,11 @@ class Regalar extends PolymerElement {
         type: Boolean,
         value: false,
         notify:true
+      },
+      status12:{
+        type: Boolean,
+        value: false,
+        notify:true
       }
    };
  }
@@ -341,6 +346,7 @@ class Regalar extends PolymerElement {
     this.set('status9',false);
     this.set('status10',false);
     this.set('status11',false);
+    this.set('status12',false);
   }
 
   _setStatusTrue(s){
