@@ -26,6 +26,11 @@ class Regalar extends PolymerElement {
           data="{{status}}">
       </app-localstorage-document>
 
+      <app-localstorage-document
+        key="page"
+        data="{{page}}">
+      </app-localstorage-document>
+
       <paper-dialog class="confirmarCumpleañero" id='actions'>
         <h2 class"txtCondir">Confirma que realizará la CAJA MAGICA a Joaquin</h2>
         <div class="buttons">
@@ -185,7 +190,8 @@ class Regalar extends PolymerElement {
 
           <template is=dom-if if='{{status12}}'>
             <div class="graciasTxt">¡Gracias!</div>
-            <img class='graciasImg' src="./images/ImagenesPasos/Monstruito.png">
+            <img class='graciasImg' src="./images/ImagenesPasos/Monstruito.png"><br>
+            <paper-button class="continuar botonPaso" toggles raised on-tap="_goHome">Ir a mi perfil</paper-button>
           </template>
 
         </p>
@@ -304,6 +310,10 @@ class Regalar extends PolymerElement {
 
   _confirmation(){
     this.$.actions.open();
+  }
+
+  _goHome(){
+    this.set('page','miPerfil')
   }
 
   _setStatusFalse(){

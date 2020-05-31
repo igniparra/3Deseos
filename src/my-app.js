@@ -61,6 +61,11 @@
         data="{{username}}">
       </app-localstorage-document>
 
+      <app-localstorage-document
+        key="page"
+        data="{{page}}">
+      </app-localstorage-document>
+
        <app-location route="{{route}}" url-space-regex="^[[rootPath]]">
        </app-location>
 
