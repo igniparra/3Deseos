@@ -17,16 +17,28 @@ class MyView1 extends PolymerElement {
       <style include="shared-styles">
         :host {
           display: block;
-
           padding: 10px;
         }
+
       </style>
 
-      <div class="card">
-        <div class="circle">1</div>
-        <h1>View One</h1>
-        <p>Ut labores minimum atomorum pro. Laudem tibique ut has.</p>
-        <p>Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Lorem ipsum dolor sit amet, per in nusquam nominavi periculis, sit elit oportere ea.Cu mei vide viris gloriatur, at populo eripuit sit.</p>
+      <div class="inicio">
+        <img class='imagenMontruitoHola' src="./images/ImagenesPasos/MonstruitoHola.png">
+        <div class="holaTxt">
+          <div class="holaTitle">¡Muchas gracias por ayudarnos a que un niño tenga su día mágico!</div>
+          <div class="holaDescrip">
+            Aquí podrás ver paso a paso cómo armar tu Caja Mágica. Ten en cuenta que necesitarás:<br>
+            • Una caja de 20x20x10 cm<br>
+            • Pegamento de papel, tijera para niños,
+            lápices de colores.<br>
+            • Globos, banderines, confetti<br>
+            • Budín, torta o cupcake.<br>
+            • Velita.<br>
+            ¡Sigue las instrucciones y tendrás una<br> Caja Mágica increíble!
+
+          </div>
+        </div>
+        <img class='imagenTortaHola' src="./images/ImagenesPasos/tortaHola.png">
       </div>
     `;
   }
