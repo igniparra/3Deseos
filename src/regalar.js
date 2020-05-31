@@ -20,39 +20,17 @@ class Regalar extends PolymerElement {
           display: block;
           padding: 10px;
         }
-        .monstruito{
-          width:200px;;
-          position:relative;
-          margin-top: -20px;
-          margin-left:8%;
-          float:left;
-      }
-      .dataCumpleañero{
-        width:100%;
-        position:relative;
-        margin-bottom:20px;
-        height:220px;
-      }
-      .confirmarCumpleañero{
-        color: #838383;
-        border-radius: 25px;
-        width: 400px;
-        height:200px;
-        font-size: 13px;
-        font-weight: 400px;
-        position: absolute;
-        top: 200px;
-        left:280px;
-        z-index:30;
-        //shadow: 0px, 0px, 0px, 0px;
-      }
-      .butConfirCum{
-        color: #b26aac;
-      }
-      .piletonDropdow{
-        margin-bottom: 100px;
-        position: relative;
-      }
+        .graciasTxt{
+          color:#b26aac;
+          font-weight:600px;
+          font-size:70px;
+          margin-left:150px;
+          margin-bottom:50px;
+        }
+        .graciasImg{
+          height: 300px;
+          margin-left:130px;
+        }
       </style>
       <app-localstorage-document
           key="status"
@@ -60,7 +38,7 @@ class Regalar extends PolymerElement {
       </app-localstorage-document>
 
       <paper-dialog class="confirmarCumpleañero" id='actions'>
-        <h2>Desea confirmar que <br>realizará de la CAJA MAGICA para Joaquin</h2>
+        <h2 class"txtCondir">Desea confirmar :)</h2>
         <div class="buttons">
           <paper-button dialog-dismiss class="butConfirCum" on_tap='_previousStatus'>No</paper-button>
           <paper-button dialog-confirm autofocus class="butConfirCum" on-tap='_nextStatus'>Si</paper-button>
@@ -104,7 +82,7 @@ class Regalar extends PolymerElement {
             <div class="decripCumpleañero">
               <div class="nombreCumpleañero">Joaquin</div>
               <div>Cumplo 11</div>
-              <div>Futbol</div>
+              <div>Animales</div>
               <div>Soy celiaco</div>
             </div>
           </div>
@@ -214,6 +192,11 @@ class Regalar extends PolymerElement {
           </div>
           <paper-button class="arrow" noink on-tap="_previousStatus" on-tap="_previousStatus"><</paper-button>
           <paper-button class="continuar botonPaso" toggles raised on-tap="_nextStatus">Continuar</paper-button>
+          </template>
+
+          <template is=dom-if if='{{status12}}'>
+            <div class="graciasTxt">¡Gracias!</div>
+            <img class='graciasImg' src="./images/ImagenesPasos/Monstruito.png">
           </template>
 
         </p>
@@ -383,6 +366,9 @@ class Regalar extends PolymerElement {
         break;
       case '11':
         this.set('status11',true);
+        break;
+      case '12':
+        this.set('status12',true);
         break;
     }
 
